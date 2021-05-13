@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
 
-const schema = mongoose.Schema({
-  email: String,
-  content: String,
-});
+const Professor = mongoose.model(
+  "Professor",
+  new mongoose.Schema({
+    email: String,
+    password: String,
+    nom: String,
+    escola: String,
+  })
+);
 
-module.exports = mongoose.model("Professor", schema);
+module.exports = Professor;
