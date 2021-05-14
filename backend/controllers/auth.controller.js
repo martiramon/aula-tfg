@@ -25,13 +25,13 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
   Professor.findOne({
     email: req.body.email,
-  }).exec((err, user) => {
+  }).exec((err, professor) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
 
-    if (!user) {
+    if (!professor) {
       return res.status(404).send({ message: "User Not found." });
     }
 
