@@ -4,20 +4,17 @@ const cors = require("cors");
 
 const app = express();
 
-require("./routes/auth.routes")(app);
-require("./routes/user.routes")(app);
-
 var corsOptions = {
   origin: "http://localhost:8081",
 };
 
 app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
-app.use(express.json());
-
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+// parse requests of content-type - application/json
+app.use(express.json());
 
 const db = require("./models");
 const dbConfig = require("./config/db.config");
@@ -34,6 +31,9 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {
