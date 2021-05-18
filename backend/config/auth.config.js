@@ -1,3 +1,3 @@
 module.exports = {
-  secret: "aula-testsociometric",
+  secret: "asgjlasdg7awgha47yfaa4yadfh4",
 };
