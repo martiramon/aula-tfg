@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 // parse requests of content-type - application/json
 app.use(express.json());
 
-const db = require("./models");
-const dbConfig = require("./config/db.config");
+const db = require("./backend/models");
+const dbConfig = require("./backend/config/db.config");
 
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
@@ -32,8 +32,8 @@ db.mongoose
     process.exit();
   });
 
-require("./routes/auth.routes")(app);
-require("./routes/user.routes")(app);
+require("./backend/routes/auth.routes")(app);
+require("./backend/routes/user.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {
