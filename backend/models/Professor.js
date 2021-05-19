@@ -7,6 +7,12 @@ const Professor = mongoose.model(
     password: String,
     nom: String,
     escola: String,
+    aules: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Aula",
+      },
+    ],
   })
 );
 
