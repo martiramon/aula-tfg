@@ -6,7 +6,7 @@ const Aula = mongoose.model(
     nom: String,
     alumnes: Array,
     professor: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Professor",
     },
   })
