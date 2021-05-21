@@ -17,4 +17,8 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.professorBoard
   );
+
+  app.get("/api/aules", [authJwt.verifyToken], controller.professorAules);
+
+  app.post("/api/aulanova", [authJwt.verifyToken], controller.novaAula);
 };
