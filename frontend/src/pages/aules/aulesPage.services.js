@@ -10,3 +10,16 @@ export const getAules = async () => {
         }
     }
 }
+
+export const postAula = async (nom) => {
+    try {
+        const response = await services.post('/api/aulanova', {
+            nom,
+        })
+        return response.data
+    } catch (error) {
+        return {
+            error: error.response.data.message,
+        }
+    }
+}
