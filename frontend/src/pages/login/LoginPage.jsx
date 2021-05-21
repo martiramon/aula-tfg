@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useHistory, useLocation } from 'react-router'
 import { EntryPage, LogoHeader } from '../../app.styles'
 import {
     Button,
@@ -7,14 +8,24 @@ import {
     InputCard,
     InputGroup,
 } from '../../components'
+import { routes } from '../../constants/routes'
 import { setToken } from '../../utils'
+import { loginService } from './loginPage.services'
+
 export const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const handleSubmit = (e) => {
+    const [isRemembering, setIsRemembering] = useState(false)
+    const history = useHistory()
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(email, password)
+        const resp = await loginService(email, password)
+        setToken(resp.accessToken, !isRemembering)
+        history.push(routes.aules.url)
+        console.log(resp)
     }
+
     return (
         <EntryPage>
             <LogoHeader>AULA</LogoHeader>
@@ -45,7 +56,10 @@ export const LoginPage = () => {
                             }}
                         />
                     </InputGroup>
-                    <Checkbox id="rememberMe" />{' '}
+                    <Checkbox
+                        id="rememberMe"
+                        onChange={(e) => setIsRemembering(e.target.checked)}
+                    />
                     <label htmlFor="rememberMe">Recorda'm</label>
                     <Button type="submit" width="100%">
                         Iniciar Sessió

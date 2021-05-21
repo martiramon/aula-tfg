@@ -32,7 +32,7 @@ exports.signin = (req, res) => {
     }
 
     if (!professor) {
-      return res.status(404).send({ message: "User Not found." });
+      return res.status(401).send({ message: "User Not found." });
     }
 
     var passwordIsValid = bcrypt.compareSync(
