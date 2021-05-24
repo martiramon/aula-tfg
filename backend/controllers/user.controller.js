@@ -36,7 +36,7 @@ exports.professorAules = (req, res) => {
   });
 };
 
-exports.professorAules = (req, res) => {
+exports.aulaId = (req, res) => {
   const decoded = jwt.verify(req.get("x-access-token"), config.secret);
   const userId = decoded.id;
 
