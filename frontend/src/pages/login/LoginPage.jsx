@@ -9,7 +9,7 @@ import {
     InputGroup,
 } from '../../components'
 import { routes } from '../../constants/routes'
-import { setToken } from '../../utils'
+import { setEscola, setNom, setToken } from '../../utils'
 import { loginService } from './loginPage.services'
 
 export const LoginPage = () => {
@@ -22,6 +22,8 @@ export const LoginPage = () => {
         e.preventDefault()
         const resp = await loginService(email, password)
         setToken(resp.accessToken, !isRemembering)
+        setNom(resp.nom, !isRemembering)
+        setEscola(resp.escola, !isRemembering)
         history.push(routes.aules.url)
         console.log(resp)
     }
