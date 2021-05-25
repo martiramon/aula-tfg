@@ -20,20 +20,22 @@ exports.professorAules = (req, res) => {
 
   Professor.findOne({
     _id: userId,
-  }).exec((err, professor) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
+  })
+    .populate("aules")
+    .exec((err, professor) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
 
-    if (!professor) {
-      return res.status(401).send({ message: "Professor Not found." });
-    }
+      if (!professor) {
+        return res.status(401).send({ message: "Professor Not found." });
+      }
 
-    res.status(200).send({
-      aules: professor.aules,
+      res.status(200).send({
+        aules: professor.aules,
+      });
     });
-  });
 };
 
 exports.aulaId = (req, res) => {
@@ -55,6 +57,28 @@ exports.aulaId = (req, res) => {
 
     res.status(200).send({
       _id: aula._id,
+    });
+  });
+};
+
+exports.aulaInfo = (req, res) => {
+  Aula.findOne({
+    _id: req.body.id,
+  }).exec((err, aula) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    if (!aula) {
+      return res.status(401).send({ message: "Aula Not found." });
+    }
+
+    res.status(200).send({
+      _id: aula._id,
+      nom: aula.nom,
+      codi: aula.codi,
+      alumnes: aula.alumnes,
     });
   });
 };
@@ -97,20 +121,22 @@ exports.aulaAlumnes = (req, res) => {
   Aula.findOne({
     professor: userId,
     nom: req.body.nom,
-  }).exec((err, aula) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
+  })
+    .populate("alumnes")
+    .exec((err, aula) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
 
-    if (!aula) {
-      return res.status(401).send({ message: "Aula Not found." });
-    }
+      if (!aula) {
+        return res.status(401).send({ message: "Aula Not found." });
+      }
 
-    res.status(200).send({
-      alumnes: aula.alumnes,
+      res.status(200).send({
+        alumnes: aula.alumnes,
+      });
     });
-  });
 };
 
 exports.nouAlumne = (req, res) => {
