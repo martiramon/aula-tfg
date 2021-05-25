@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const Professor = mongoose.model(
   "Professor",
   new mongoose.Schema({
-    email: String,
+    email: {
+      type: String,
+      unique: true,
+    },
     password: String,
     nom: String,
     escola: String,
