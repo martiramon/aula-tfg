@@ -140,12 +140,9 @@ exports.aulaAlumnes = (req, res) => {
 };
 
 exports.nouAlumne = (req, res) => {
-  const decoded = jwt.verify(req.get("x-access-token"), config.secret);
-  const userId = decoded.id;
-
   const alumne = new Alumne({
     nom: req.body.nom,
-    aula: aulaId,
+    aula: req.body.aulaId,
   });
 
   alumne.save((err, alumne) => {

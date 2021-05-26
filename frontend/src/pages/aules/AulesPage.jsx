@@ -3,18 +3,26 @@ import { Button, Input, InputCard, InputGroup } from '../../components'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import { getToken, setToken } from '../../utils'
-import { getAules, postAula } from './aulesPage.services'
+import { getAules, postAlumne, postAula } from './aulesPage.services'
 
 var items = []
 
 export const AulesPage = () => {
     const [isBusy, setBusy] = useState(true)
     var [data, setData] = useState()
-    const [nom, setNom] = useState('')
+    const [nomAu, setNomAu] = useState('')
+    const [nomAl, setNomAl] = useState('')
 
     const handleSubmitAula = async (e) => {
         e.preventDefault()
-        const resp = await postAula(nom)
+        const resp = await postAula(nomAu)
+        window.location.reload()
+        console.log(resp)
+    }
+
+    const handleSubmitAlumne = async (e) => {
+        e.preventDefault()
+        const resp = await postAlumne(nomAl, '60a7ee6eaa077072c7066b92')
         window.location.reload()
         console.log(resp)
     }
@@ -43,9 +51,28 @@ export const AulesPage = () => {
                             type="text"
                             placeholder="1r A"
                             required
-                            value={nom}
+                            value={nomAu}
                             onChange={(e) => {
-                                setNom(e.target.value)
+                                setNomAu(e.target.value)
+                            }}
+                        ></Input>
+                    </InputGroup>
+                    <Button type="submit" width="25%">
+                        Afegir
+                    </Button>
+                </form>
+            </InputCard>
+            <InputCard>
+                <form onSubmit={handleSubmitAlumne}>
+                    <InputGroup>
+                        <label>Nom i cognoms de l'alumne</label>
+                        <Input
+                            type="text"
+                            placeholder="Carles Porta Gaset"
+                            required
+                            value={nomAl}
+                            onChange={(e) => {
+                                setNomAl(e.target.value)
                             }}
                         ></Input>
                     </InputGroup>
