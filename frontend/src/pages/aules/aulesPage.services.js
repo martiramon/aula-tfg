@@ -24,9 +24,11 @@ export const postAula = async (nom) => {
     }
 }
 
-export const getAlumnes = async () => {
+export const getAlumnes = async (nom) => {
     try {
-        const response = await services.get('/api/alumnes')
+        const response = await services.get('/api/alumnes', {
+            nom,
+        })
         return response.data
     } catch (error) {
         return {

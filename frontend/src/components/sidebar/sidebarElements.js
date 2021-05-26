@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const List = styled.ul`
+export const List = styled.div`
     background: #ffffff;
     list-style-type: none;
     height: 100%;
@@ -10,8 +10,10 @@ export const List = styled.ul`
     padding: 0.2rem;
     z-index: 12;
     align-items: center;
-    margin-left: 1rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    position: fixed;
+    left: 0;
+    top: 3.7rem;
     /* Third Nav */
     /* justify-content: flex-start; */
 `

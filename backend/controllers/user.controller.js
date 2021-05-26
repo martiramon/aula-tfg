@@ -109,7 +109,13 @@ exports.novaAula = (req, res) => {
       }
       professor.aules.push(aula);
       professor.save();
-      res.send({ message: "Aula was added successfully!" });
+      res.send({
+        id: aula._id,
+        nom: aula.nom,
+        codi: aula.codi,
+        professor: aula.professor,
+        alumnes: aula.alumnes,
+      });
     });
   });
 };
@@ -120,7 +126,7 @@ exports.aulaAlumnes = (req, res) => {
 
   Aula.findOne({
     professor: userId,
-    nom: req.body.nom,
+    nom: "1r A",
   })
     .populate("alumnes")
     .exec((err, aula) => {
@@ -130,7 +136,7 @@ exports.aulaAlumnes = (req, res) => {
       }
 
       if (!aula) {
-        return res.status(401).send({ message: "Aula Not found." });
+        return res.status(401).send({ message: req.body });
       }
 
       res.status(200).send({
@@ -162,7 +168,11 @@ exports.nouAlumne = (req, res) => {
       }
       aula.alumnes.push(alumne);
       aula.save();
-      res.send({ message: "Alumne was added successfully!" });
+      res.send({
+        id: alumne._id,
+        nom: alumne.nom,
+        aula: alumne.aula,
+      });
     });
   });
 };

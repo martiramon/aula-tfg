@@ -1,14 +1,19 @@
 import React from 'react'
 import { List, ListElement, SideBtnLink, SideTitle } from './sidebarElements'
 
-const Sidebar = ({ items }) => {
+const Sidebar = ({ items, onAulaClick }) => {
     return (
         <>
             <List>
                 <SideTitle>AULES</SideTitle>
                 {items ? (
-                    items.map((nom) => (
-                        <ListElement key={nom}>{nom}</ListElement>
+                    items.map((aula) => (
+                        <ListElement
+                            key={aula._id}
+                            onClick={() => onAulaClick(aula._id)}
+                        >
+                            {aula.nom}
+                        </ListElement>
                     ))
                 ) : (
                     <ListElement>Carregant</ListElement>
