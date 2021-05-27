@@ -27,6 +27,9 @@ export const AulesPage = () => {
     const [nomAu, setNomAu] = useState('')
     const [nomAl, setNomAl] = useState('')
 
+    const [aulaAct, setAulaAct] = useState('')
+    const [isClicked, setIsClicked] = useState(false)
+
     const handleSubmitAula = async (e) => {
         e.preventDefault()
         const resp = await postAula(nomAu)
@@ -69,49 +72,66 @@ export const AulesPage = () => {
             ) : (
                 <Sidebar
                     items={data}
-                    onAulaClick={(id) => console.log(id)}
+                    onAulaClick={(aula) => {
+                        setAulaAct(aula)
+                        setIsClicked(true)
+                    }}
                 ></Sidebar>
             )}
             <ContainerAules>
-                <InputCard>
-                    <form onSubmit={handleSubmitAula}>
-                        <InputGroup>
-                            <label>Nom de l'Aula</label>
-                            <Input
-                                type="text"
-                                placeholder="1r A"
-                                required
-                                value={nomAu}
-                                onChange={(e) => {
-                                    setNomAu(e.target.value)
-                                }}
-                            ></Input>
-                        </InputGroup>
-                        <Button type="submit" width="25%">
-                            Afegir
-                        </Button>
-                    </form>
-                </InputCard>
-                <InputCard>
-                    <form onSubmit={handleSubmitAlumne}>
-                        <InputGroup>
-                            <label>Nom i cognoms de l'alumne</label>
-                            <Input
-                                type="text"
-                                placeholder="Carles Porta Gaset"
-                                required
-                                value={nomAl}
-                                onChange={(e) => {
-                                    setNomAl(e.target.value)
-                                }}
-                            ></Input>
-                        </InputGroup>
-                        <Button type="submit" width="25%">
-                            Afegir
-                        </Button>
-                    </form>
-                </InputCard>
-                {isBusyT ? <Mtable></Mtable> : <Mtable data={dataT}></Mtable>}{' '}
+                {isClicked ? (
+                    <div display="flex" flex-direction="row">
+                        <h1>{aulaAct.nom}</h1>
+                        <h2>{aulaAct.codi}</h2>
+                    </div>
+                ) : (
+                    <div></div>
+                )}
+                <div display="flex" flex-direction="row">
+                    <InputCard>
+                        <form onSubmit={handleSubmitAula}>
+                            <InputGroup>
+                                <label>Nom de l'Aula</label>
+                                <Input
+                                    type="text"
+                                    placeholder="1r A"
+                                    required
+                                    value={nomAu}
+                                    onChange={(e) => {
+                                        setNomAu(e.target.value)
+                                    }}
+                                ></Input>
+                            </InputGroup>
+                            <Button type="submit" width="25%">
+                                Afegir
+                            </Button>
+                        </form>
+                    </InputCard>
+                    <InputCard>
+                        <form onSubmit={handleSubmitAlumne}>
+                            <InputGroup>
+                                <label>Nom i cognoms de l'alumne</label>
+                                <Input
+                                    type="text"
+                                    placeholder="Carles Porta Gaset"
+                                    required
+                                    value={nomAl}
+                                    onChange={(e) => {
+                                        setNomAl(e.target.value)
+                                    }}
+                                ></Input>
+                            </InputGroup>
+                            <Button type="submit" width="25%">
+                                Afegir
+                            </Button>
+                        </form>
+                    </InputCard>
+                    {isBusyT ? (
+                        <Mtable></Mtable>
+                    ) : (
+                        <Mtable data={dataT}></Mtable>
+                    )}{' '}
+                </div>
             </ContainerAules>
         </>
     )

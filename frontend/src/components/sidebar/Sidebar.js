@@ -10,7 +10,7 @@ const Sidebar = ({ items, onAulaClick }) => {
                     items.map((aula) => (
                         <ListElement
                             key={aula._id}
-                            onClick={() => onAulaClick(aula._id)}
+                            onClick={() => onAulaClick(aula)}
                         >
                             {aula.nom}
                         </ListElement>

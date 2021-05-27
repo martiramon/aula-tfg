@@ -5,7 +5,7 @@ export const ContainerAules = styled.div`
     height: calc(100%-3.5rem);
     width: calc(100%-19rem);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     z-index: 1;
     align-items: center;
     position: fixed;
