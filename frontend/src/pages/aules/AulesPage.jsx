@@ -5,6 +5,7 @@ import {
     Input,
     InputCard,
     InputGroup,
+    Modal,
 } from '../../components'
 import Mtable from '../../components/mtable/Mtable'
 import Navbar from '../../components/navbar/Navbar'
@@ -24,26 +25,26 @@ export const AulesPage = () => {
     const [data, setData] = useState()
     const [dataT, setDataT] = useState()
 
-    const [nomAu, setNomAu] = useState('')
-    const [nomAl, setNomAl] = useState('')
-
     const [aulaAct, setAulaAct] = useState('')
     const [isClicked, setIsClicked] = useState(false)
 
-    const handleSubmitAula = async (e) => {
-        e.preventDefault()
+    const [showModalAu, setShowModalAu] = useState(false)
+    const [showModalAl, setShowModalAl] = useState(false)
+
+    const handleSubmitAula = async (nomAu) => {
         const resp = await postAula(nomAu)
         setData((currentData) => {
             return [...currentData, resp]
         })
+        setShowModalAu(false)
     }
 
-    const handleSubmitAlumne = async (e) => {
-        e.preventDefault()
+    const handleSubmitAlumne = async (nomAl) => {
         const resp = await postAlumne(nomAl, '60a7ee6eaa077072c7066b92')
         setDataT((currentData) => {
             return [...currentData, resp]
         })
+        setShowModalAl(false)
     }
 
     useEffect(() => {
@@ -57,12 +58,14 @@ export const AulesPage = () => {
 
     useEffect(() => {
         const omplirAlumnes = async () => {
-            const response = await getAlumnes('1r A')
-            setDataT(response.alumnes)
-            setBusyT(false)
+            if (isClicked) {
+                const response = await getAlumnes(aulaAct._id)
+                setDataT(response.alumnes)
+                setBusyT(false)
+            }
         }
         omplirAlumnes()
-    }, [])
+    }, [aulaAct])
 
     return (
         <>
@@ -76,6 +79,7 @@ export const AulesPage = () => {
                         setAulaAct(aula)
                         setIsClicked(true)
                     }}
+                    onButtonClick={() => setShowModalAu(true)}
                 ></Sidebar>
             )}
             <ContainerAules>
@@ -87,52 +91,33 @@ export const AulesPage = () => {
                 ) : (
                     <div></div>
                 )}
-                <div display="flex" flex-direction="row">
-                    <InputCard>
-                        <form onSubmit={handleSubmitAula}>
-                            <InputGroup>
-                                <label>Nom de l'Aula</label>
-                                <Input
-                                    type="text"
-                                    placeholder="1r A"
-                                    required
-                                    value={nomAu}
-                                    onChange={(e) => {
-                                        setNomAu(e.target.value)
-                                    }}
-                                ></Input>
-                            </InputGroup>
-                            <Button type="submit" width="25%">
-                                Afegir
-                            </Button>
-                        </form>
-                    </InputCard>
-                    <InputCard>
-                        <form onSubmit={handleSubmitAlumne}>
-                            <InputGroup>
-                                <label>Nom i cognoms de l'alumne</label>
-                                <Input
-                                    type="text"
-                                    placeholder="Carles Porta Gaset"
-                                    required
-                                    value={nomAl}
-                                    onChange={(e) => {
-                                        setNomAl(e.target.value)
-                                    }}
-                                ></Input>
-                            </InputGroup>
-                            <Button type="submit" width="25%">
-                                Afegir
-                            </Button>
-                        </form>
-                    </InputCard>
-                    {isBusyT ? (
-                        <Mtable></Mtable>
-                    ) : (
+                {isBusyT ? (
+                    <div></div>
+                ) : (
+                    <div>
                         <Mtable data={dataT}></Mtable>
-                    )}{' '}
-                </div>
+                        <Button onClick={() => setShowModalAl(true)}>
+                            Afegir alumne
+                        </Button>
+                    </div>
+                )}
             </ContainerAules>
+            <Modal
+                showModal={showModalAu}
+                setShowModal={setShowModalAu}
+                aula={true}
+                handleSubmit={(nom) => {
+                    handleSubmitAula(nom)
+                }}
+            ></Modal>
+            <Modal
+                showModal={showModalAl}
+                setShowModal={setShowModalAl}
+                aula={false}
+                handleSubmit={(nom) => {
+                    handleSubmitAlumne(nom)
+                }}
+            ></Modal>
         </>
     )
 }

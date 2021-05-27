@@ -1,7 +1,7 @@
 import React from 'react'
 import { List, ListElement, SideBtnLink, SideTitle } from './sidebarElements'
 
-const Sidebar = ({ items, onAulaClick }) => {
+const Sidebar = ({ items, onAulaClick, onButtonClick }) => {
     return (
         <>
             <List>
@@ -18,7 +18,9 @@ const Sidebar = ({ items, onAulaClick }) => {
                 ) : (
                     <ListElement>Carregant</ListElement>
                 )}
-                <SideBtnLink>Afegir aula</SideBtnLink>
+                <SideBtnLink onClick={() => onButtonClick()}>
+                    Afegir aula
+                </SideBtnLink>
             </List>
         </>
     )
