@@ -1,5 +1,7 @@
 import React from 'react'
+import { routes } from '../../constants/routes'
 import { getEscola, getNom } from '../../utils'
+import { useHistory } from 'react-router'
 import {
     Nav,
     NavLink,
@@ -12,10 +14,11 @@ import {
 } from './navbarElements'
 
 const Navbar = () => {
-    const activateLasers = () => {
+    const history = useHistory()
+    const handleLogout = () => {
         localStorage.clear()
         sessionStorage.clear()
-        window.location.reload()
+        history.push(routes.login.url)
     }
     return (
         <>
@@ -24,7 +27,7 @@ const Navbar = () => {
                 <NavEscola>{getEscola()}</NavEscola>
                 <NavUser> {getNom()} </NavUser>
                 <NavBtn>
-                    <NavBtnLink onClick={activateLasers}>
+                    <NavBtnLink onClick={handleLogout}>
                         Tanca la sessió
                     </NavBtnLink>
                 </NavBtn>
