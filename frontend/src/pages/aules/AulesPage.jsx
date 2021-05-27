@@ -40,7 +40,7 @@ export const AulesPage = () => {
     }
 
     const handleSubmitAlumne = async (nomAl) => {
-        const resp = await postAlumne(nomAl, '60a7ee6eaa077072c7066b92')
+        const resp = await postAlumne(nomAl, aulaAct._id)
         setDataT((currentData) => {
             return [...currentData, resp]
         })

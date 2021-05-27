@@ -24,10 +24,10 @@ export const postAula = async (nom) => {
     }
 }
 
-export const getAlumnes = async (_id) => {
+export const getAlumnes = async (aulaId) => {
     try {
-        const response = await services.get('/api/alumnes', {
-            _id,
+        const response = await services.post('/api/alumnes', {
+            aulaId,
         })
         return response.data
     } catch (error) {

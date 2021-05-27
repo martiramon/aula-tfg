@@ -8,7 +8,10 @@ export const services = axios.create({
 services.interceptors.request.use((req) => {
     const token = getToken()
     if (token) {
-        req.headers = { 'x-access-token': token }
+        req.headers = {
+            'x-access-token': token,
+            'Content-Type': 'application/json',
+        }
     }
     return req
 })
@@ -17,11 +20,7 @@ services.interceptors.response.use(
     (res) => res,
     (error) => {
         const { status } = error.response
-        if (getToken() && (status === 401 || status === 403)) {
-            localStorage.clear()
-            sessionStorage.clear()
-            window.location.reload()
-        }
+
         return Promise.reject(error)
     }
 )

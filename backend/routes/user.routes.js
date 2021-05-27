@@ -24,7 +24,7 @@ module.exports = function (app) {
 
   app.post("/api/aulanova", [authJwt.verifyToken], controller.novaAula);
 
-  app.get("/api/alumnes", [authJwt.verifyToken], controller.aulaAlumnes);
+  app.post("/api/alumnes", [authJwt.verifyToken], controller.aulaAlumnes);
 
   app.post("/api/alumnenou", [authJwt.verifyToken], controller.nouAlumne);
 };

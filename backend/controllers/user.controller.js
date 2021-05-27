@@ -38,6 +38,27 @@ exports.professorAules = (req, res) => {
     });
 };
 
+exports.aulaAlumnes = (req, res) => {
+  Aula.findOne({
+    _id: req.body.aulaId,
+  })
+    .populate("alumnes")
+    .exec((err, aula) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+
+      if (!aula) {
+        return res.status(401).send({ message: "Aula Not found." });
+      }
+
+      res.status(200).send({
+        alumnes: aula.alumnes,
+      });
+    });
+};
+
 exports.aulaId = (req, res) => {
   const decoded = jwt.verify(req.get("x-access-token"), config.secret);
   const userId = decoded.id;
@@ -118,31 +139,6 @@ exports.novaAula = (req, res) => {
       });
     });
   });
-};
-
-exports.aulaAlumnes = (req, res) => {
-  const decoded = jwt.verify(req.get("x-access-token"), config.secret);
-  const userId = decoded.id;
-
-  Aula.findOne({
-    professor: userId,
-    nom: "1r A",
-  })
-    .populate("alumnes")
-    .exec((err, aula) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-
-      if (!aula) {
-        return res.status(401).send({ message: req.body });
-      }
-
-      res.status(200).send({
-        alumnes: aula.alumnes,
-      });
-    });
 };
 
 exports.nouAlumne = (req, res) => {
