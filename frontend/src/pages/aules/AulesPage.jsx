@@ -51,7 +51,13 @@ export const AulesPage = () => {
     useEffect(() => {
         const omplirAules = async () => {
             const response = await getAules()
-            setData(response.aules)
+            setData(
+                response.aules.sort(function (a, b) {
+                    if (a.nom < b.nom) return -1
+                    if (a.nom > b.nom) return 1
+                    return 0
+                })
+            )
             setBusy(false)
         }
         omplirAules()
@@ -61,7 +67,13 @@ export const AulesPage = () => {
         const omplirAlumnes = async () => {
             if (isClicked) {
                 const response = await getAlumnes(aulaAct._id)
-                setDataT(response.alumnes)
+                setDataT(
+                    response.alumnes.sort(function (a, b) {
+                        if (a.nom < b.nom) return -1
+                        if (a.nom > b.nom) return 1
+                        return 0
+                    })
+                )
                 setBusyT(false)
             }
         }
