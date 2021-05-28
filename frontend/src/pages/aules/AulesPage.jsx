@@ -86,7 +86,7 @@ export const AulesPage = () => {
                 {isClicked ? (
                     <div display="flex" flex-direction="row">
                         <h1>{aulaAct.nom}</h1>
-                        <h2>{aulaAct.codi}</h2>
+                        <h2>Codi d'Aula: {aulaAct.codi}</h2>
                     </div>
                 ) : (
                     <div></div>
@@ -94,7 +94,7 @@ export const AulesPage = () => {
                 {isBusyT ? (
                     <div></div>
                 ) : (
-                    <div>
+                    <div display="flex" width="100%">
                         <Mtable data={dataT}></Mtable>
                         <Button onClick={() => setShowModalAl(true)}>
                             Afegir alumne

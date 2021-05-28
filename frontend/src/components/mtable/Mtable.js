@@ -18,6 +18,19 @@ import SaveAlt from '@material-ui/icons/SaveAlt'
 import Search from '@material-ui/icons/Search'
 import ViewColumn from '@material-ui/icons/ViewColumn'
 
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { caES } from '@material-ui/core/locale'
+import { TablePagination } from '@material-ui/core'
+
+const theme = createMuiTheme(
+    {
+        palette: {
+            primary: { main: '#2f8bfd' },
+        },
+    },
+    caES
+)
+
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -56,7 +69,11 @@ const Mtable = ({ data }) => {
                 columns={columns}
                 data={data}
                 title={"Llistat d'alumnes"}
-            />
+                options={{
+                    pageSize: 8,
+                    pageSizeOptions: [],
+                }}
+            ></MaterialTable>
         </div>
     )
 }
