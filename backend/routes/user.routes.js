@@ -20,11 +20,13 @@ module.exports = function (app) {
 
   app.get("/api/aules", [authJwt.verifyToken], controller.professorAules);
 
-  app.get("/api/aula", [authJwt.verifyToken], controller.aulaId);
-
   app.post("/api/aulanova", [authJwt.verifyToken], controller.novaAula);
 
-  app.post("/api/alumnes", [authJwt.verifyToken], controller.aulaAlumnes);
+  app.get(
+    "/api/alumnes/:aulaId",
+    [authJwt.verifyToken],
+    controller.aulaAlumnes
+  );
 
   app.post("/api/alumnenou", [authJwt.verifyToken], controller.nouAlumne);
 };

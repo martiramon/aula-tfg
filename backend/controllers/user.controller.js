@@ -40,7 +40,7 @@ exports.professorAules = (req, res) => {
 
 exports.aulaAlumnes = (req, res) => {
   Aula.findOne({
-    _id: req.body.aulaId,
+    _id: req.params.aulaId,
   })
     .populate("alumnes")
     .exec((err, aula) => {
@@ -57,51 +57,6 @@ exports.aulaAlumnes = (req, res) => {
         alumnes: aula.alumnes,
       });
     });
-};
-
-exports.aulaId = (req, res) => {
-  const decoded = jwt.verify(req.get("x-access-token"), config.secret);
-  const userId = decoded.id;
-
-  Aula.findOne({
-    nom: req.body.nom,
-    professor: userId,
-  }).exec((err, aula) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-
-    if (!aula) {
-      return res.status(401).send({ message: "Aula Not found." });
-    }
-
-    res.status(200).send({
-      _id: aula._id,
-    });
-  });
-};
-
-exports.aulaInfo = (req, res) => {
-  Aula.findOne({
-    _id: req.body.id,
-  }).exec((err, aula) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-
-    if (!aula) {
-      return res.status(401).send({ message: "Aula Not found." });
-    }
-
-    res.status(200).send({
-      _id: aula._id,
-      nom: aula.nom,
-      codi: aula.codi,
-      alumnes: aula.alumnes,
-    });
-  });
 };
 
 exports.novaAula = (req, res) => {
