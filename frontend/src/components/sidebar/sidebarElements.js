@@ -18,8 +18,7 @@ export const List = styled.div`
     /* justify-content: flex-start; */
 `
 
-export const ListElement = styled.li`
-    background: #ffffff;
+export const ListElement = styled.div`
     list-style-type: none;
     height: 2.5rem;
     width: 3rem;
@@ -28,6 +27,10 @@ export const ListElement = styled.li`
     z-index: 12;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    &:hover {
+        background-color: '#f0f0f0';
+    }
     /* Third Nav */
     /* justify-content: flex-start; */
 `
@@ -38,8 +41,9 @@ export const SideTitle = styled.h2`
     text-decoration: none;
     padding: 0 1rem;
     margin-top: 3rem;
-    font-size: 1.2rem;
-    font-weight: 500;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
 `
 
 export const SideBtnLink = styled.button`
@@ -55,7 +59,7 @@ export const SideBtnLink = styled.button`
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
-    margin-left: 0;
+    margin-left: 1rem;
     margin-top: 1rem;
     /* Second Nav */
 `

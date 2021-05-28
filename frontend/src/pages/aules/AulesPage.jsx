@@ -7,6 +7,7 @@ import {
     InputGroup,
     Modal,
 } from '../../components'
+import ClippedDrawer from '../../components/drawer/Drawer'
 import Mtable from '../../components/mtable/Mtable'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
@@ -71,16 +72,18 @@ export const AulesPage = () => {
         <>
             <Navbar />
             {isBusy ? (
-                <Sidebar></Sidebar>
+                <ClippedDrawer></ClippedDrawer>
             ) : (
-                <Sidebar
+                <ClippedDrawer
                     items={data}
                     onAulaClick={(aula) => {
                         setAulaAct(aula)
                         setIsClicked(true)
                     }}
                     onButtonClick={() => setShowModalAu(true)}
-                ></Sidebar>
+                >
+                    {' '}
+                </ClippedDrawer>
             )}
             <ContainerAules>
                 {isClicked ? (
