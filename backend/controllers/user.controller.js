@@ -59,6 +59,27 @@ exports.aulaAlumnes = (req, res) => {
     });
 };
 
+exports.alumnesCodi = (req, res) => {
+  Aula.findOne({
+    codi: req.params.aulaCodi,
+  })
+    .populate("alumnes")
+    .exec((err, aula) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+
+      if (!aula) {
+        return res.status(401).send({ message: "Aula Not found." });
+      }
+
+      res.status(200).send({
+        alumnes: aula.alumnes,
+      });
+    });
+};
+
 exports.novaAula = (req, res) => {
   const decoded = jwt.verify(req.get("x-access-token"), config.secret);
   const userId = decoded.id;

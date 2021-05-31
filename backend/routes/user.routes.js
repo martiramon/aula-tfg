@@ -29,4 +29,6 @@ module.exports = function (app) {
   );
 
   app.post("/api/alumnenou", [authJwt.verifyToken], controller.nouAlumne);
+
+  app.get("/api/alumnesAula/:aulaCodi", controller.alumnesCodi);
 };

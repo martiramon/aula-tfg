@@ -20,7 +20,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn'
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { caES } from '@material-ui/core/locale'
-import { TablePagination } from '@material-ui/core'
+import { IconButton, TablePagination } from '@material-ui/core'
 
 const theme = createMuiTheme(
     {
