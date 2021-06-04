@@ -58,9 +58,15 @@ const tableIcons = {
     )),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 }
-
 const Mtable = ({ data }) => {
-    const columns = [{ title: 'Nom i cognoms', field: 'nom' }]
+    const columns = [
+        { title: 'Nom i cognoms', field: 'nom' },
+        {
+            title: 'Test respost?',
+            field: 'resposta',
+            type: 'boolean',
+        },
+    ]
 
     return (
         <div>
