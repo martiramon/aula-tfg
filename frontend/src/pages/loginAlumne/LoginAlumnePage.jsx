@@ -118,7 +118,11 @@ export const LoginAlumePage = () => {
                         >
                             {codiOk
                                 ? alumnes.alumnes.map((alumne) => (
-                                      <MenuItem key={alumne._id} value={alumne}>
+                                      <MenuItem
+                                          key={alumne._id}
+                                          value={alumne}
+                                          disabled={alumne.resposta}
+                                      >
                                           {alumne.nom}
                                       </MenuItem>
                                   ))
