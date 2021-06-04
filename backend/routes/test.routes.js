@@ -13,4 +13,6 @@ module.exports = function (app) {
   app.post("/api/testnou", [authJwt.verifyToken], controller.nouTest);
 
   app.get("/api/testAula/:aulaId", controller.testAula);
+
+  app.post("/api/respostanova", controller.novaResposta);
 };

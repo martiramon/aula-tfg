@@ -60,3 +60,50 @@ exports.nouTest = (req, res) => {
     });
   });
 };
+
+exports.novaResposta = (req, res) => {
+  const resposta = new Resposta({
+    autor: req.body.autor,
+    test: req.body.test,
+    respostes: req.body.respostes,
+  });
+
+  resposta.save((err, test) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    Test.findOne({
+      _id: req.body.test,
+    }).exec((err, test) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      if (!test) {
+        return res.status(401).send({ message: "Test Not found." });
+      }
+      test.respostes.push(resposta);
+      test.save();
+      Alumne.findOne({
+        _id: req.body.autor,
+      }).exec((err, alumne) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        if (!test) {
+          return res.status(401).send({ message: "Alumne Not found." });
+        }
+        alumne.resposta = resposta;
+        alumne.save();
+        res.send({
+          id: resposta._id,
+          autor: resposta.autor,
+          test: resposta.test,
+          respostes: resposta.respostes,
+        });
+      });
+    });
+  });
+};
