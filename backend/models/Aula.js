@@ -20,6 +20,10 @@ const aulaSchema = new mongoose.Schema({
       ref: "Alumne",
     },
   ],
+  test: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Test",
+  },
 });
 
 aulaSchema.index(

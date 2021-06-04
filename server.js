@@ -34,6 +34,7 @@ db.mongoose
 
 require("./backend/routes/auth.routes")(app);
 require("./backend/routes/user.routes")(app);
+require("./backend/routes/test.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {

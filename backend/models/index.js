@@ -11,4 +11,8 @@ db.aula = require("./Aula");
 
 db.alumne = require("./Alumne");
 
+db.test = require("./Test");
+
+db.resposta = require("./Resposta");
+
 module.exports = db;

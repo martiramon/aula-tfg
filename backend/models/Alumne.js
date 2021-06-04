@@ -4,7 +4,11 @@ const alumneSchema = new mongoose.Schema({
   nom: String,
   aula: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Aules",
+    ref: "Aula",
+  },
+  resposta: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Resposta",
   },
 });
 
