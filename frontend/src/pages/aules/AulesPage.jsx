@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 import {
     Button,
     ContainerAules,
@@ -11,6 +12,7 @@ import ClippedDrawer from '../../components/drawer/Drawer'
 import Mtable from '../../components/mtable/Mtable'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
+import { routes } from '../../constants/routes'
 import { getToken, setToken } from '../../utils'
 import {
     getAlumnes,
@@ -20,6 +22,8 @@ import {
 } from './aulesPage.services'
 
 export const AulesPage = () => {
+    const history = useHistory()
+
     const [isBusy, setBusy] = useState(true)
     const [isBusyT, setBusyT] = useState(true)
 
@@ -51,14 +55,18 @@ export const AulesPage = () => {
     useEffect(() => {
         const omplirAules = async () => {
             const response = await getAules()
-            setData(
-                response.aules.sort(function (a, b) {
-                    if (a.nom < b.nom) return -1
-                    if (a.nom > b.nom) return 1
-                    return 0
-                })
-            )
-            setBusy(false)
+            if (!response.error) {
+                setData(
+                    response.aules.sort(function (a, b) {
+                        if (a.nom < b.nom) return -1
+                        if (a.nom > b.nom) return 1
+                        return 0
+                    })
+                )
+                setBusy(false)
+            } else {
+                history.push(routes.login.url)
+            }
         }
         omplirAules()
     }, [])
