@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const ContainerAules = styled.div`
     background: transparent;
-    height: calc(100%-3.5rem);
-    width: calc(100%-19rem);
+    height: calc(100% - 3.5rem);
+    width: calc(100% - 25rem);
     display: flex;
     flex-direction: column;
     z-index: 1;

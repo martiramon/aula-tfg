@@ -107,9 +107,16 @@ export const AulesPage = () => {
             )}
             <ContainerAules>
                 {isClicked ? (
-                    <div display="flex" flex-direction="row">
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            width: '100%',
+                        }}
+                    >
                         <h1>{aulaAct.nom}</h1>
-                        <h2>Codi d'Aula: {aulaAct.codi}</h2>
+                        <h2>Codi únic d'Aula: {aulaAct.codi}</h2>
                     </div>
                 ) : (
                     <div></div>
@@ -117,7 +124,7 @@ export const AulesPage = () => {
                 {isBusyT ? (
                     <div></div>
                 ) : (
-                    <div display="flex" width="100%">
+                    <div display="flex" style={{ width: '100%' }}>
                         <Mtable data={dataT}></Mtable>
                         <Button onClick={() => setShowModalAl(true)}>
                             Afegir alumne
