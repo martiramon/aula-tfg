@@ -31,4 +31,10 @@ module.exports = function (app) {
   app.post("/api/alumnenou", [authJwt.verifyToken], controller.nouAlumne);
 
   app.get("/api/alumnesAula/:aulaCodi", controller.alumnesCodi);
+
+  app.delete(
+    "/api/eliminarAlumne/:alumneId",
+    [authJwt.verifyToken],
+    controller.eliminarAlumne
+  );
 };

@@ -1,3 +1,4 @@
+import { FormatColorResetOutlined } from '@material-ui/icons'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import {
@@ -7,6 +8,7 @@ import {
     InputCard,
     InputGroup,
     Modal,
+    ModalDelete,
 } from '../../components'
 import ClippedDrawer from '../../components/drawer/Drawer'
 import Mtable from '../../components/mtable/Mtable'
@@ -15,6 +17,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import { routes } from '../../constants/routes'
 import { getToken, setToken } from '../../utils'
 import {
+    deleteAlumne,
     getAlumnes,
     getAules,
     postAlumne,
@@ -37,6 +40,9 @@ export const AulesPage = () => {
     const [showModalAl, setShowModalAl] = useState(false)
 
     const [errorModal, setErrorModal] = useState(false)
+
+    const [showModalDelete, setShowModalDelete] = useState(false)
+    const [alumneAct, setAlumneAct] = useState('')
 
     const handleSubmitAula = async (nomAu) => {
         const resp = await postAula(nomAu)
@@ -62,6 +68,22 @@ export const AulesPage = () => {
         } else {
             setErrorModal(true)
         }
+    }
+
+    const handleDeleteAlumne = async () => {
+        console.log(alumneAct)
+        const resp = await deleteAlumne(alumneAct._id)
+        if (!resp.error) {
+            const response = await getAlumnes(aulaAct._id)
+            setDataT(
+                response.alumnes.sort(function (a, b) {
+                    if (a.nom < b.nom) return -1
+                    if (a.nom > b.nom) return 1
+                    return 0
+                })
+            )
+        }
+        setShowModalDelete(false)
     }
 
     useEffect(() => {
@@ -137,10 +159,14 @@ export const AulesPage = () => {
                     <div></div>
                 ) : (
                     <div display="flex" style={{ width: '100%' }}>
-                        <Mtable data={dataT}></Mtable>
-                        <Button onClick={() => setShowModalAl(true)}>
-                            Afegir alumne
-                        </Button>
+                        <Mtable
+                            data={dataT}
+                            onButtonClick={() => setShowModalAl(true)}
+                            onDeleteClick={(alumne) => {
+                                setAlumneAct(alumne)
+                                setShowModalDelete(true)
+                            }}
+                        ></Mtable>
                     </div>
                 )}
             </ContainerAules>
@@ -162,6 +188,14 @@ export const AulesPage = () => {
                 }}
                 errorModal={errorModal}
             ></Modal>
+            <ModalDelete
+                showModal={showModalDelete}
+                setShowModal={setShowModalDelete}
+                alumne={true}
+                handleSubmit={() => {
+                    handleDeleteAlumne()
+                }}
+            ></ModalDelete>
         </>
     )
 }

@@ -55,7 +55,6 @@ export default function ClippedDrawer({ items, onAulaClick, onButtonClick }) {
                     <List>
                         <SideTitle justify-content="center">AULES</SideTitle>
                         {items ? (
-                            (console.log(items),
                             items.map((aula) => (
                                 <ListItem
                                     button
@@ -69,7 +68,7 @@ export default function ClippedDrawer({ items, onAulaClick, onButtonClick }) {
                                     </ListItemIcon>
                                     <ListItemText primary={aula.nom} />
                                 </ListItem>
-                            )))
+                            ))
                         ) : (
                             <ListItem>
                                 <ListItemIcon>

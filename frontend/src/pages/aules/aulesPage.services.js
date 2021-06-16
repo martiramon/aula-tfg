@@ -48,3 +48,16 @@ export const postAlumne = async (nom, aulaId) => {
         }
     }
 }
+
+export const deleteAlumne = async (alumneId) => {
+    try {
+        const response = await services.delete(
+            '/api/eliminarAlumne/' + alumneId
+        )
+        return response.data
+    } catch (error) {
+        return {
+            error: error.response.data.message,
+        }
+    }
+}

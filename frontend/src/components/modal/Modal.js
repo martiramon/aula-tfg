@@ -43,7 +43,6 @@ export const Modal = ({
                                 type="string"
                                 fullWidth
                                 onChange={(e) => {
-                                    console.log(e)
                                     setNom(e.target.value)
                                 }}
                                 helperText={

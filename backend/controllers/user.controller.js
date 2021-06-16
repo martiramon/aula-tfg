@@ -148,3 +148,20 @@ exports.nouAlumne = (req, res) => {
     });
   });
 };
+
+exports.eliminarAlumne = (req, res) => {
+  Alumne.findOneAndDelete({
+    _id: req.params.alumneId,
+  }).exec((err, alumne) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    if (!alumne) {
+      return res.status(401).send({ message: "Alumne Not found." });
+    }
+
+    res.status(200).send({ message: "Alumne eliminat" });
+  });
+};
