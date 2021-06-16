@@ -36,20 +36,32 @@ export const AulesPage = () => {
     const [showModalAu, setShowModalAu] = useState(false)
     const [showModalAl, setShowModalAl] = useState(false)
 
+    const [errorModal, setErrorModal] = useState(false)
+
     const handleSubmitAula = async (nomAu) => {
         const resp = await postAula(nomAu)
-        setData((currentData) => {
-            return [...currentData, resp]
-        })
-        setShowModalAu(false)
+        if (!resp.error) {
+            setData((currentData) => {
+                return [...currentData, resp]
+            })
+            setErrorModal(false)
+            setShowModalAu(false)
+        } else {
+            setErrorModal(true)
+        }
     }
 
     const handleSubmitAlumne = async (nomAl) => {
         const resp = await postAlumne(nomAl, aulaAct._id)
-        setDataT((currentData) => {
-            return [...currentData, resp]
-        })
-        setShowModalAl(false)
+        if (!resp.error) {
+            setDataT((currentData) => {
+                return [...currentData, resp]
+            })
+            setErrorModal(false)
+            setShowModalAl(false)
+        } else {
+            setErrorModal(true)
+        }
     }
 
     useEffect(() => {
@@ -139,6 +151,7 @@ export const AulesPage = () => {
                 handleSubmit={(nom) => {
                     handleSubmitAula(nom)
                 }}
+                errorModal={errorModal}
             ></Modal>
             <Modal
                 showModal={showModalAl}
@@ -147,6 +160,7 @@ export const AulesPage = () => {
                 handleSubmit={(nom) => {
                     handleSubmitAlumne(nom)
                 }}
+                errorModal={errorModal}
             ></Modal>
         </>
     )

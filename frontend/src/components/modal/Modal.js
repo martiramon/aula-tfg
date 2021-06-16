@@ -9,7 +9,13 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { TextField } from '@material-ui/core'
 import { Button } from '../button/Button'
 
-export const Modal = ({ showModal, setShowModal, handleSubmit, aula }) => {
+export const Modal = ({
+    showModal,
+    setShowModal,
+    handleSubmit,
+    aula,
+    errorModal,
+}) => {
     const [nom, setNom] = useState('')
 
     const handleClose = () => {
@@ -29,6 +35,7 @@ export const Modal = ({ showModal, setShowModal, handleSubmit, aula }) => {
                         </DialogTitle>
                         <DialogContent>
                             <TextField
+                                error={errorModal}
                                 autoFocus
                                 margin="dense"
                                 id="name"
@@ -39,6 +46,9 @@ export const Modal = ({ showModal, setShowModal, handleSubmit, aula }) => {
                                     console.log(e)
                                     setNom(e.target.value)
                                 }}
+                                helperText={
+                                    errorModal ? 'Aula ja existent' : ''
+                                }
                             />
                         </DialogContent>
                     </div>
@@ -49,6 +59,7 @@ export const Modal = ({ showModal, setShowModal, handleSubmit, aula }) => {
                         </DialogTitle>
                         <DialogContent>
                             <TextField
+                                error={errorModal}
                                 autoFocus
                                 margin="dense"
                                 id="name"
@@ -58,6 +69,9 @@ export const Modal = ({ showModal, setShowModal, handleSubmit, aula }) => {
                                 onChange={(e) => {
                                     setNom(e.target.value)
                                 }}
+                                helperText={
+                                    errorModal ? 'Alumne ja existent' : ''
+                                }
                             />
                         </DialogContent>
                     </div>
