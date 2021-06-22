@@ -97,6 +97,22 @@ const Mtable = ({ data, onButtonClick, onDeleteClick }) => {
                     pageSize: 8,
                     pageSizeOptions: [],
                 }}
+                localization={{
+                    header: {
+                        actions: 'Accions',
+                    },
+                    toolbar: {
+                        searchPlaceholder: 'Cerca',
+                        searchTooltip: 'Cerca',
+                    },
+                    pagination: {
+                        labelDisplayedRows: '{from}-{to} de {count}',
+                        firstTooltip: 'Primera Pàgina',
+                        previousTooltip: 'Anterior',
+                        nextTooltip: 'Següent',
+                        lastTooltip: 'Última Pàgina',
+                    },
+                }}
             ></MaterialTable>
         </div>
     )
