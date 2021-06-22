@@ -109,7 +109,9 @@ export const AulesPage = () => {
         const omplirAlumnes = async () => {
             if (isClicked) {
                 const response = await getAlumnes(aulaAct._id)
-                if (response.alumnes) {
+                if (response.error) {
+                    history.push(routes.login.url)
+                } else if (response.alumnes) {
                     setDataT(
                         response.alumnes.sort(function (a, b) {
                             if (a.nom < b.nom) return -1
