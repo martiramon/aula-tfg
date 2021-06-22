@@ -109,14 +109,18 @@ export const AulesPage = () => {
         const omplirAlumnes = async () => {
             if (isClicked) {
                 const response = await getAlumnes(aulaAct._id)
-                setDataT(
-                    response.alumnes.sort(function (a, b) {
-                        if (a.nom < b.nom) return -1
-                        if (a.nom > b.nom) return 1
-                        return 0
-                    })
-                )
-                setBusyT(false)
+                if (response.alumnes) {
+                    setDataT(
+                        response.alumnes.sort(function (a, b) {
+                            if (a.nom < b.nom) return -1
+                            if (a.nom > b.nom) return 1
+                            return 0
+                        })
+                    )
+                    setBusyT(false)
+                } else {
+                    setDataT('')
+                }
             }
         }
         omplirAlumnes()
