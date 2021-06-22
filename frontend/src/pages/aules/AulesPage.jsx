@@ -15,7 +15,7 @@ import Mtable from '../../components/mtable/Mtable'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import { routes } from '../../constants/routes'
-import { getToken, setToken } from '../../utils'
+import { getToken, setAula, setToken } from '../../utils'
 import {
     deleteAlumne,
     getAlumnes,
@@ -139,6 +139,7 @@ export const AulesPage = () => {
                     onAulaClick={(aula) => {
                         setAulaAct(aula)
                         setIsClicked(true)
+                        setAula(aula._id)
                     }}
                     onButtonClick={() => setShowModalAu(true)}
                 >
