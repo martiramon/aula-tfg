@@ -112,6 +112,10 @@ const Mtable = ({ data, onButtonClick, onDeleteClick }) => {
                         nextTooltip: 'Següent',
                         lastTooltip: 'Última Pàgina',
                     },
+                    body: {
+                        emptyDataSourceMessage:
+                            'Encara no hi ha alumnes en aquesta aula',
+                    },
                 }}
             ></MaterialTable>
         </div>
