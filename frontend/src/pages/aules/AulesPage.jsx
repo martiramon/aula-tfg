@@ -149,7 +149,41 @@ export const AulesPage = () => {
                             width: '100%',
                         }}
                     >
-                        <h1>{aulaAct.nom}</h1>
+                        {' '}
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'start',
+                            }}
+                        >
+                            <h1>{aulaAct.nom}</h1>
+                            {aulaAct.test ? (
+                                <Button
+                                    style={{
+                                        paddingBottom: '0.5rem',
+                                        paddingTop: '0.5rem',
+                                        marginTop: '1rem',
+                                        marginBottom: '1rem',
+                                        marginLeft: '2rem',
+                                    }}
+                                >
+                                    Veure test i resultats
+                                </Button>
+                            ) : (
+                                <Button
+                                    style={{
+                                        paddingBottom: '0.5rem',
+                                        paddingTop: '0.5rem',
+                                        marginTop: '1rem',
+                                        marginBottom: '1rem',
+                                        marginLeft: '2rem',
+                                    }}
+                                >
+                                    Crear el test
+                                </Button>
+                            )}
+                        </div>
                         <h2>Codi únic d'Aula: {aulaAct.codi}</h2>
                     </div>
                 ) : (
