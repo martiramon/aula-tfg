@@ -13,7 +13,6 @@ import {
 import ClippedDrawer from '../../components/drawer/Drawer'
 import Mtable from '../../components/mtable/Mtable'
 import Navbar from '../../components/navbar/Navbar'
-import Sidebar from '../../components/sidebar/Sidebar'
 import { routes } from '../../constants/routes'
 import { getToken, setAula, setToken } from '../../utils'
 import {
@@ -139,7 +138,7 @@ export const AulesPage = () => {
                     onAulaClick={(aula) => {
                         setAulaAct(aula)
                         setIsClicked(true)
-                        setAula(aula._id)
+                        setAula(aula._id, aula.nom)
                     }}
                     onButtonClick={() => setShowModalAu(true)}
                 >
@@ -185,6 +184,10 @@ export const AulesPage = () => {
                                         marginTop: '1rem',
                                         marginBottom: '1rem',
                                         marginLeft: '2rem',
+                                    }}
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        history.push(routes.crearTest.url)
                                     }}
                                 >
                                     Crear el test
