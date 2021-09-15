@@ -11,3 +11,7 @@ export const setAula = (aulaId, aulaNom) => {
         sessionStorage.setItem(nomAula, aulaNom)
     }
 }
+
+export const getAula = () => {
+    return localStorage.getItem(idAula) || sessionStorage.getItem(idAula)
+}

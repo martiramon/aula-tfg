@@ -23,6 +23,8 @@ import {
 import ClippedDrawer from '../../components/drawer/Drawer'
 import Navbar from '../../components/navbar/Navbar'
 import { routes } from '../../constants/routes'
+import { getAula } from '../../utils'
+import { postTest } from './crearTestPage.services'
 
 export const CrearTestPage = () => {
     const history = useHistory()
@@ -67,11 +69,46 @@ export const CrearTestPage = () => {
     )
     const [pregunta10Pos, setPregunta10Pos] = useState('negatiu')
 
+    const aula = getAula()
     const handleSubmit = async (e) => {
         e.preventDefault()
+        var textPreguntes = [
+            pregunta1,
+            pregunta2,
+            pregunta3,
+            pregunta4,
+            pregunta5,
+            pregunta6,
+            pregunta7,
+            pregunta8,
+            pregunta9,
+            pregunta10,
+        ]
+        var positiuPreguntes = [
+            pregunta1Pos === 'positiu',
+            pregunta2Pos === 'positiu',
+            pregunta3Pos === 'positiu',
+            pregunta4Pos === 'positiu',
+            pregunta5Pos === 'positiu',
+            pregunta6Pos === 'positiu',
+            pregunta7Pos === 'positiu',
+            pregunta8Pos === 'positiu',
+            pregunta9Pos === 'positiu',
+            pregunta10Pos === 'positiu',
+        ]
+        var preguntes = []
+        for (var i = 0; i < 9; i++) {
+            preguntes.push({
+                text: textPreguntes[i],
+                positiva: positiuPreguntes[i],
+            })
+        }
+        console.log(aula)
+        console.log(preguntes)
+        const resp = await postTest(aula, preguntes)
         //const resp = await loginService(email, password)
         //history.push(routes.aules.url)
-        //console.log(resp)
+        console.log(resp)
     }
 
     const GreenRadio = withStyles({
