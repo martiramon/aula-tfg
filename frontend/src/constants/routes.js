@@ -4,6 +4,7 @@ import {
     LoginAlumePage,
     LoginPage,
     SignupPage,
+    RespondreTestPage,
 } from '../pages'
 
 export const routes = {
@@ -12,4 +13,9 @@ export const routes = {
     aules: { url: '/aules', private: true, component: AulesPage },
     loginAlumne: { url: '/alumne', private: false, component: LoginAlumePage },
     crearTest: { url: '/crearTest', private: true, component: CrearTestPage },
+    respondreTest: {
+        url: '/respondreTest',
+        private: false,
+        component: RespondreTestPage,
+    },
 }

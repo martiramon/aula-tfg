@@ -1,6 +1,7 @@
 const nomAlumne = 'nomAlumne'
 const idAlumne = 'idAlumne'
 const aulaAlumne = 'aulaAlumne'
+const aulaAlumneCodi = 'aulaAlumneCodi'
 
 export const getNomAlumne = () => {
     return sessionStorage.getItem(nomAlumne)
@@ -36,4 +37,16 @@ export const setAulaAlumne = (aula) => {
 
 export const deleteAulaAlumne = () => {
     sessionStorage.removeItem(aulaAlumne)
+}
+
+export const getAulaAlumneCodi = () => {
+    return sessionStorage.getItem(aulaAlumneCodi)
+}
+
+export const setAulaAlumneCodi = (aula) => {
+    sessionStorage.setItem(aulaAlumneCodi, aula)
+}
+
+export const deleteAulaAlumneCodi = () => {
+    sessionStorage.removeItem(aulaAlumneCodi)
 }

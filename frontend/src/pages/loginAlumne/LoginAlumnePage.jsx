@@ -15,6 +15,7 @@ import { InputAndBotton, InputCard, InputGroup } from '../../components'
 import { routes } from '../../constants/routes'
 import {
     setAulaAlumne,
+    setAulaAlumneCodi,
     setEscola,
     setIdAlumne,
     setNom,
@@ -44,6 +45,8 @@ export const LoginAlumePage = () => {
         setNomAlumne(alumneAct.nom)
         setIdAlumne(alumneAct._id)
         setAulaAlumne(alumneAct.aula)
+        setAulaAlumneCodi(codi)
+        history.push(routes.respondreTest.url)
     }
 
     const handleSubmitCodi = async (e) => {

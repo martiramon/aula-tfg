@@ -97,7 +97,7 @@ export const CrearTestPage = () => {
             pregunta10Pos === 'positiu',
         ]
         var preguntes = []
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < 10; i++) {
             preguntes.push({
                 text: textPreguntes[i],
                 positiva: positiuPreguntes[i],
