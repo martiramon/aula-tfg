@@ -13,6 +13,7 @@ module.exports = function (app) {
   app.post("/api/testnou", [authJwt.verifyToken], controller.nouTest);
 
   app.get("/api/testAula/:aulaId", controller.testAula);
+  app.get("/api/testRespostes/:testId", controller.testRespostes);
 
   app.post("/api/respostanova", controller.novaResposta);
 };

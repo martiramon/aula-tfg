@@ -5,6 +5,7 @@ import {
     LoginPage,
     SignupPage,
     RespondreTestPage,
+    ResultatsTestPage,
 } from '../pages'
 
 export const routes = {
@@ -17,5 +18,10 @@ export const routes = {
         url: '/respondreTest',
         private: false,
         component: RespondreTestPage,
+    },
+    resultatsTest: {
+        url: '/resultatsTest',
+        private: true,
+        component: ResultatsTestPage,
     },
 }

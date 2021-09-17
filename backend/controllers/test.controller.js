@@ -29,6 +29,26 @@ exports.testAula = (req, res) => {
     });
 };
 
+exports.testRespostes = (req, res) => {
+  Test.findOne({
+    _id: req.params.testId,
+  })
+    .populate("respostes")
+    .exec((err, test) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+
+      if (!test) {
+        return res.status(401).send({ message: "Test Not found." });
+      }
+      res.status(200).send({
+        respostes: test.respostes,
+      });
+    });
+};
+
 exports.nouTest = (req, res) => {
   const test = new Test({
     aula: req.body.aula,

@@ -138,7 +138,7 @@ export const AulesPage = () => {
                     onAulaClick={(aula) => {
                         setAulaAct(aula)
                         setIsClicked(true)
-                        setAula(aula._id, aula.nom)
+                        setAula(aula._id, aula.nom, aula.test)
                     }}
                     onButtonClick={() => setShowModalAu(true)}
                 >
@@ -172,6 +172,10 @@ export const AulesPage = () => {
                                         marginTop: '1rem',
                                         marginBottom: '1rem',
                                         marginLeft: '2rem',
+                                    }}
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        history.push(routes.resultatsTest.url)
                                     }}
                                 >
                                     Veure test i resultats
