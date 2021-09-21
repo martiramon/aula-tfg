@@ -130,7 +130,7 @@ export const ResultatsTestPage = () => {
                 source: 'n1',
                 target: 'n2',
                 label: 'SEES',
-                type: 'arrow',
+                type: 'curvedArrow',
                 color: vermell,
             },
         ],
