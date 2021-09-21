@@ -29,6 +29,27 @@ exports.testAula = (req, res) => {
     });
 };
 
+exports.testId = (req, res) => {
+  Test.findOne({
+    _id: req.params.testId,
+  })
+    .populate("respostes")
+    .exec((err, test) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+
+      if (!test) {
+        return res.status(401).send({ message: "Test Not found." });
+      }
+
+      res.status(200).send({
+        test,
+      });
+    });
+};
+
 exports.testRespostes = (req, res) => {
   Test.findOne({
     _id: req.params.testId,

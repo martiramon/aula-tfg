@@ -14,6 +14,7 @@ module.exports = function (app) {
 
   app.get("/api/testAula/:aulaId", controller.testAula);
   app.get("/api/testRespostes/:testId", controller.testRespostes);
+  app.get("/api/testId/:testId", controller.testId);
 
   app.post("/api/respostanova", controller.novaResposta);
 };
