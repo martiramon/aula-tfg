@@ -27,8 +27,9 @@ import Navbar from '../../components/navbar/Navbar'
 import { routes } from '../../constants/routes'
 import { getAula, getNomAula, getTestAula } from '../../utils'
 
-import { Graph } from 'react-d3-graph'
 import { getTestResp } from './resultatsTestPage.services'
+
+import { Sigma, RandomizeNodePositions, RelativeSize } from 'react-sigma'
 
 export const ResultatsTestPage = () => {
     const history = useHistory()
@@ -49,30 +50,6 @@ export const ResultatsTestPage = () => {
         checked: {},
     })((props) => <Radio color="default" {...props} />)
 
-    const data = {
-        nodes: [{ id: 'Harry' }, { id: 'Sally' }, { id: 'Alice' }],
-        links: [
-            { source: 'Harry', target: 'Sally' },
-            { source: 'Harry', target: 'Alice' },
-        ],
-    }
-
-    const myConfig = {
-        nodeHighlightBehavior: true,
-        directed: true,
-        staticGraph: false,
-        node: {
-            color: 'lightgreen',
-            fontSize: 12,
-            highlightFontSize: 12,
-            size: 700,
-            highlightStrokeColor: 'blue',
-        },
-        link: {
-            highlightColor: 'lightblue',
-        },
-    }
-
     const onClickNode = function (nodeId) {
         window.alert(`Clicked node ${nodeId}`)
     }
@@ -84,7 +61,7 @@ export const ResultatsTestPage = () => {
             const response = await getTestResp(idTest)
             if (!response.error) {
                 setRespostes(response.respostes)
-                console.log(respostes)
+                console.log(response.respostes)
                 setBusy(false)
             } else {
                 history.push(routes.login.url)
@@ -92,6 +69,14 @@ export const ResultatsTestPage = () => {
         }
         carregarTest()
     }, [])
+
+    let myGraph = {
+        nodes: [
+            { id: 'n1', label: 'Alice' },
+            { id: 'n2', label: 'Rabbit' },
+        ],
+        edges: [{ id: 'e1', source: 'n1', target: 'n2', label: 'SEES' }],
+    }
 
     return (
         <>
@@ -133,15 +118,23 @@ export const ResultatsTestPage = () => {
                         {' '}
                         <h1>{nomAula}</h1>
                         <h2>Sociograma de les respostes:</h2>
-                        <div>
-                            <Graph
-                                id="graph-id" // id is mandatory
-                                data={data}
-                                config={myConfig}
-                                onClickNode={onClickNode}
-                            />
-                            ;
-                        </div>
+                        <Sigma
+                            renderer="webgl"
+                            style={{
+                                display: 'flex',
+                                maxWidth: 'inherit',
+                                height: '400px',
+                            }}
+                            graph={myGraph}
+                            settings={{
+                                drawEdges: true,
+                                clone: false,
+                                labelThreshold: '0',
+                            }}
+                        >
+                            <RelativeSize initialSize={15} />
+                            <RandomizeNodePositions />
+                        </Sigma>
                     </InputCard>
                 </EntryPage>
             )}
