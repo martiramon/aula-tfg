@@ -32,6 +32,8 @@ import { getTest, getTestResp } from './resultatsTestPage.services'
 import { Sigma, RandomizeNodePositions, RelativeSize } from 'react-sigma'
 import { getAlumnes } from '../aules/aulesPage.services'
 
+var graf = { nodes: [], edges: [] }
+
 export const ResultatsTestPage = () => {
     const history = useHistory()
 
@@ -92,6 +94,66 @@ export const ResultatsTestPage = () => {
         }
     }
 
+    const calcularIndex = function () {
+        var sizeM = matriu.length
+        var index = 0
+        for (var j = 1; j < sizeM; j++) {
+            for (var i = 1; i < sizeM; i++) {
+                index += matriu[i][j]
+            }
+            matriu[j][0].index = index
+            index = 0
+        }
+    }
+
+    const crearGraf = function () {
+        var sizeM = matriu.length
+        for (var i = 1; i < sizeM; i++) {
+            for (var j = 0; j < sizeM; j++) {
+                if (j === 0) {
+                    if (matriu[i][j].index === 0) {
+                        graf.nodes.push({
+                            id: matriu[i][j]._id,
+                            label: matriu[i][j].nom,
+                            color: taronja,
+                        })
+                    } else if (matriu[i][j].index > 0) {
+                        graf.nodes.push({
+                            id: matriu[i][j]._id,
+                            label: matriu[i][j].nom,
+                            color: verd,
+                        })
+                    } else {
+                        graf.nodes.push({
+                            id: matriu[i][j]._id,
+                            label: matriu[i][j].nom,
+                            color: vermell,
+                        })
+                    }
+                } else if (matriu[i][j]) {
+                    if (matriu[i][j] > 0) {
+                        graf.edges.push({
+                            id: '' + i + j,
+                            source: matriu[i][0]._id,
+                            target: matriu[0][j]._id,
+                            type: 'curvedArrow',
+                            color: verd,
+                        })
+                    } else {
+                        graf.edges.push({
+                            id: '' + i + j,
+                            source: matriu[i][0]._id,
+                            target: matriu[0][j]._id,
+                            type: 'curvedArrow',
+                            color: vermell,
+                        })
+                    }
+                }
+            }
+        }
+        console.log(graf)
+    }
+
     useEffect(() => {
         const carregarTest = async () => {
             const idTest = getTestAula()
@@ -107,7 +169,9 @@ export const ResultatsTestPage = () => {
                         response.test.preguntes,
                         response.test.respostes
                     )
+                    calcularIndex()
                     console.log(matriu)
+                    crearGraf()
                     setBusy(false)
                 } else {
                     history.push(routes.login.url)
@@ -176,6 +240,8 @@ export const ResultatsTestPage = () => {
                         {' '}
                         <h1>{nomAula}</h1>
                         <h2>Sociograma de les respostes:</h2>
+                        {console.log('holaaaaa')}
+                        {console.log(graf)}
                         <Sigma
                             renderer="canvas"
                             style={{
@@ -183,12 +249,14 @@ export const ResultatsTestPage = () => {
                                 maxWidth: 'inherit',
                                 height: '600px',
                             }}
-                            graph={myGraph}
+                            graph={graf}
                             settings={{
                                 drawEdges: true,
                                 clone: false,
                                 labelThreshold: '0',
                                 minArrowSize: 10,
+                                minNodeSize: 8,
+                                maxNodeSize: 8.1,
                             }}
                         >
                             <RelativeSize initialSize={15} />
