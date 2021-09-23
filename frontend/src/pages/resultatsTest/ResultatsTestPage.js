@@ -107,6 +107,7 @@ export const ResultatsTestPage = () => {
     }
 
     const crearGraf = function () {
+        graf = { nodes: [], edges: [] }
         var sizeM = matriu.length
         for (var i = 1; i < sizeM; i++) {
             for (var j = 0; j < sizeM; j++) {
