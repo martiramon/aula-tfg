@@ -2,7 +2,7 @@ import { services } from '../../utils'
 
 export const getTestAula = async (aulaId) => {
     try {
-        const response = await services.get('/api/testAula/' + aulaId)
+        const response = await services.get('/api/aula/test/' + aulaId)
         return response.data
     } catch (error) {
         return {
@@ -13,7 +13,7 @@ export const getTestAula = async (aulaId) => {
 
 export const postResposta = async (autor, test, respostes) => {
     try {
-        const response = await services.post('/api/respostanova', {
+        const response = await services.post('/api/resposta', {
             autor,
             test,
             respostes,

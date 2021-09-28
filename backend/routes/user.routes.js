@@ -10,6 +10,8 @@ module.exports = function (app) {
     next();
   });
 
+  /* API DE PROVA PEL TOKEN D'AUTENTIFICACIÓ
+
   app.get("/api/test/all", controller.allAccess);
 
   app.get(
@@ -17,23 +19,24 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.professorBoard
   );
+  */
 
   app.get("/api/aules", [authJwt.verifyToken], controller.professorAules);
 
-  app.post("/api/aulanova", [authJwt.verifyToken], controller.novaAula);
+  app.post("/api/aula", [authJwt.verifyToken], controller.novaAula);
 
   app.get(
-    "/api/alumnes/:aulaId",
+    "/api/aules/alumnes/:aulaId",
     [authJwt.verifyToken],
     controller.aulaAlumnes
   );
 
-  app.post("/api/alumnenou", [authJwt.verifyToken], controller.nouAlumne);
+  app.post("/api/alumne", [authJwt.verifyToken], controller.nouAlumne);
 
-  app.get("/api/alumnesAula/:aulaCodi", controller.alumnesCodi);
+  app.get("/api/aules/alumnes/codi/:aulaCodi", controller.alumnesCodi);
 
   app.delete(
-    "/api/eliminarAlumne/:alumneId",
+    "/api/alumne/:alumneId",
     [authJwt.verifyToken],
     controller.eliminarAlumne
   );

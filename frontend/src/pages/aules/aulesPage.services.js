@@ -26,7 +26,7 @@ export const postAula = async (nom) => {
 
 export const getAlumnes = async (aulaId) => {
     try {
-        const response = await services.get('/api/alumnes/' + aulaId)
+        const response = await services.get('/api/aules/alumnes/' + aulaId)
         return response.data
     } catch (error) {
         return {
@@ -37,7 +37,7 @@ export const getAlumnes = async (aulaId) => {
 
 export const postAlumne = async (nom, aulaId) => {
     try {
-        const response = await services.post('/api/alumnenou', {
+        const response = await services.post('/api/alumne', {
             nom,
             aulaId,
         })
@@ -51,9 +51,7 @@ export const postAlumne = async (nom, aulaId) => {
 
 export const deleteAlumne = async (alumneId) => {
     try {
-        const response = await services.delete(
-            '/api/eliminarAlumne/' + alumneId
-        )
+        const response = await services.delete('/api/alumne/' + alumneId)
         return response.data
     } catch (error) {
         return {

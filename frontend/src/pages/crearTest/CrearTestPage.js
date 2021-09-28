@@ -106,8 +106,7 @@ export const CrearTestPage = () => {
         console.log(aula)
         console.log(preguntes)
         const resp = await postTest(aula, preguntes)
-        //const resp = await loginService(email, password)
-        //history.push(routes.aules.url)
+        history.push(routes.aules.url)
         console.log(resp)
     }
 

@@ -10,11 +10,15 @@ module.exports = function (app) {
     next();
   });
 
-  app.post("/api/testnou", [authJwt.verifyToken], controller.nouTest);
+  app.post("/api/test", [authJwt.verifyToken], controller.nouTest);
 
-  app.get("/api/testAula/:aulaId", controller.testAula);
-  app.get("/api/testRespostes/:testId", controller.testRespostes);
-  app.get("/api/testId/:testId", controller.testId);
+  app.get("/api/aula/test/:aulaId", controller.testAula);
+  app.get(
+    "/api/test/respostes/:testId",
+    [authJwt.verifyToken],
+    controller.testRespostes
+  );
+  app.get("/api/test/:testId", [authJwt.verifyToken], controller.testId);
 
-  app.post("/api/respostanova", controller.novaResposta);
+  app.post("/api/resposta", controller.novaResposta);
 };
