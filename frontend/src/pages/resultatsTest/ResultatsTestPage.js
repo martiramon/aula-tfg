@@ -33,6 +33,9 @@ import { Sigma, RandomizeNodePositions, RelativeSize } from 'react-sigma'
 import { getAlumnes } from '../aules/aulesPage.services'
 
 var graf = { nodes: [], edges: [] }
+var grafP = { nodes: [], edges: [] }
+var grafN = { nodes: [], edges: [] }
+var matriu
 
 export const ResultatsTestPage = () => {
     const history = useHistory()
@@ -40,13 +43,14 @@ export const ResultatsTestPage = () => {
     const vermell = '#f04639'
     const taronja = '#f1953f'
     const verd = '#5de422'
+    const negre = '#000000'
 
     const nomAula = getNomAula()
     const idAula = getAula()
     const [isBusy, setBusy] = useState(true)
     const [test, setTest] = useState('')
     const [respostes, setRespostes] = useState('')
-    var matriu
+    const [tipusGraf, setTipusGraf] = useState('complet')
 
     const GreenRadio = withStyles({
         root: {
@@ -96,29 +100,34 @@ export const ResultatsTestPage = () => {
 
     const calcularIndex = function () {
         var sizeM = matriu.length
-        var index = 0
+        var indexP = 0
+        var indexN = 0
         for (var j = 1; j < sizeM; j++) {
             for (var i = 1; i < sizeM; i++) {
-                index += matriu[i][j]
+                if (matriu[i][j] > 0) indexP += matriu[i][j]
+                if (matriu[i][j] < 0) indexN -= matriu[i][j]
             }
-            matriu[j][0].index = index
-            index = 0
+            matriu[j][0].indexT = indexP - indexN
+            matriu[j][0].indexP = indexP
+            matriu[j][0].indexN = indexN
+            indexP = 0
+            indexN = 0
         }
     }
 
-    const crearGraf = function () {
+    const crearGrafComplet = function () {
         graf = { nodes: [], edges: [] }
         var sizeM = matriu.length
         for (var i = 1; i < sizeM; i++) {
             for (var j = 0; j < sizeM; j++) {
                 if (j === 0) {
-                    if (matriu[i][j].index === 0) {
+                    if (matriu[i][j].indexT === 0) {
                         graf.nodes.push({
                             id: matriu[i][j]._id,
                             label: matriu[i][j].nom,
                             color: taronja,
                         })
-                    } else if (matriu[i][j].index > 0) {
+                    } else if (matriu[i][j].indexT > 0) {
                         graf.nodes.push({
                             id: matriu[i][j]._id,
                             label: matriu[i][j].nom,
@@ -155,6 +164,76 @@ export const ResultatsTestPage = () => {
         console.log(graf)
     }
 
+    const crearGrafPositiu = function () {
+        grafP = { nodes: [], edges: [] }
+        var sizeM = matriu.length
+        for (var i = 1; i < sizeM; i++) {
+            for (var j = 0; j < sizeM; j++) {
+                if (j === 0) {
+                    if (matriu[i][j].indexP === 0) {
+                        grafP.nodes.push({
+                            id: matriu[i][j]._id,
+                            label: matriu[i][j].nom,
+                            color: negre,
+                        })
+                    } else {
+                        grafP.nodes.push({
+                            id: matriu[i][j]._id,
+                            label: matriu[i][j].nom,
+                            color: verd,
+                        })
+                    }
+                } else if (matriu[i][j]) {
+                    if (matriu[i][j] > 0) {
+                        grafP.edges.push({
+                            id: '' + i + j,
+                            source: matriu[i][0]._id,
+                            target: matriu[0][j]._id,
+                            type: 'curvedArrow',
+                            color: verd,
+                        })
+                    }
+                }
+            }
+        }
+        console.log(grafP)
+    }
+
+    const crearGrafNegatiu = function () {
+        grafN = { nodes: [], edges: [] }
+        var sizeM = matriu.length
+        for (var i = 1; i < sizeM; i++) {
+            for (var j = 0; j < sizeM; j++) {
+                if (j === 0) {
+                    if (matriu[i][j].indexN === 0) {
+                        grafN.nodes.push({
+                            id: matriu[i][j]._id,
+                            label: matriu[i][j].nom,
+                            color: negre,
+                        })
+                    } else {
+                        grafN.nodes.push({
+                            id: matriu[i][j]._id,
+                            label: matriu[i][j].nom,
+                            color: vermell,
+                        })
+                    }
+                } else if (matriu[i][j]) {
+                    if (matriu[i][j] < 0) {
+                        grafN.edges.push({
+                            id: '' + i + j,
+                            source: matriu[i][0]._id,
+                            target: matriu[0][j]._id,
+                            type: 'curvedArrow',
+                            color: vermell,
+                        })
+                    }
+                }
+            }
+        }
+        console.log(grafN)
+    }
+
     useEffect(() => {
         const carregarTest = async () => {
             const idTest = getTestAula()
@@ -172,7 +251,9 @@ export const ResultatsTestPage = () => {
                     )
                     calcularIndex()
                     console.log(matriu)
-                    crearGraf()
+                    crearGrafComplet()
+                    crearGrafPositiu()
+                    crearGrafNegatiu()
                     setBusy(false)
                 } else {
                     history.push(routes.login.url)
@@ -183,6 +264,10 @@ export const ResultatsTestPage = () => {
         }
         carregarTest()
     }, [])
+
+    const handleChange = (event) => {
+        setTipusGraf(event.target.value)
+    }
 
     return (
         <>
@@ -223,30 +308,104 @@ export const ResultatsTestPage = () => {
                     >
                         {' '}
                         <h1>{nomAula}</h1>
-                        <h2>Sociograma de les respostes:</h2>
-                        {console.log('holaaaaa')}
-                        {console.log(graf.edges.length)}
+                        <h2 style={{ marginBottom: '20px' }}>
+                            Sociograma de les respostes:
+                        </h2>
                         {graf.edges.length !== 0 ? (
-                            <Sigma
-                                renderer="canvas"
-                                style={{
-                                    display: 'flex',
-                                    maxWidth: 'inherit',
-                                    height: '600px',
-                                }}
-                                graph={graf}
-                                settings={{
-                                    drawEdges: true,
-                                    clone: false,
-                                    labelThreshold: '0',
-                                    minArrowSize: 10,
-                                    minNodeSize: 8,
-                                    maxNodeSize: 8.1,
-                                }}
-                            >
-                                <RelativeSize initialSize={15} />
-                                <RandomizeNodePositions />
-                            </Sigma>
+                            <div>
+                                <FormControl component="fieldset">
+                                    <RadioGroup
+                                        row
+                                        aria-label="seleccioGraf"
+                                        name="row-radio-buttons-group"
+                                        value={tipusGraf}
+                                        onChange={handleChange}
+                                        style={{ marginBottom: '20px' }}
+                                    >
+                                        <FormControlLabel
+                                            value="complet"
+                                            control={<Radio />}
+                                            label="Graf complet"
+                                        />
+                                        <FormControlLabel
+                                            value="positiu"
+                                            control={<Radio />}
+                                            label="Només interaccions positives"
+                                        />
+                                        <FormControlLabel
+                                            value="negatiu"
+                                            control={<Radio />}
+                                            label="Només interaccions negatives"
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
+                                {tipusGraf === 'complet' && (
+                                    <Sigma
+                                        renderer="canvas"
+                                        style={{
+                                            display: 'flex',
+                                            maxWidth: 'inherit',
+                                            height: '510px',
+                                        }}
+                                        graph={graf}
+                                        settings={{
+                                            drawEdges: true,
+                                            clone: false,
+                                            labelThreshold: '0',
+                                            minArrowSize: 10,
+                                            minNodeSize: 8,
+                                            maxNodeSize: 8.1,
+                                        }}
+                                    >
+                                        <RelativeSize initialSize={15} />
+                                        <RandomizeNodePositions />
+                                    </Sigma>
+                                )}
+                                {tipusGraf === 'positiu' && (
+                                    <Sigma
+                                        renderer="canvas"
+                                        style={{
+                                            display: 'flex',
+                                            maxWidth: 'inherit',
+                                            height: '510px',
+                                        }}
+                                        graph={grafP}
+                                        settings={{
+                                            drawEdges: true,
+                                            clone: false,
+                                            labelThreshold: '0',
+                                            minArrowSize: 10,
+                                            minNodeSize: 8,
+                                            maxNodeSize: 8.1,
+                                        }}
+                                    >
+                                        <RelativeSize initialSize={15} />
+                                        <RandomizeNodePositions />
+                                    </Sigma>
+                                )}
+                                {tipusGraf === 'negatiu' && (
+                                    <Sigma
+                                        renderer="canvas"
+                                        style={{
+                                            display: 'flex',
+                                            maxWidth: 'inherit',
+                                            height: '510px',
+                                        }}
+                                        graph={grafN}
+                                        settings={{
+                                            drawEdges: true,
+                                            clone: false,
+                                            labelThreshold: '0',
+                                            minArrowSize: 10,
+                                            minNodeSize: 8,
+                                            maxNodeSize: 8.1,
+                                        }}
+                                    >
+                                        <RelativeSize initialSize={15} />
+                                        <RandomizeNodePositions />
+                                    </Sigma>
+                                )}
+                            </div>
                         ) : (
                             <h3>Encara no hi ha cap resposta dels alumnes</h3>
                         )}
