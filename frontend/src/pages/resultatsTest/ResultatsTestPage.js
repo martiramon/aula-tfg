@@ -184,23 +184,6 @@ export const ResultatsTestPage = () => {
         carregarTest()
     }, [])
 
-    let myGraph = {
-        nodes: [
-            { id: 'n1', label: 'Alice', color: verd },
-            { id: 'n2', label: 'Rabbit', color: taronja },
-        ],
-        edges: [
-            {
-                id: 'e1',
-                source: 'n1',
-                target: 'n2',
-                label: 'SEES',
-                type: 'curvedArrow',
-                color: vermell,
-            },
-        ],
-    }
-
     return (
         <>
             <Navbar />
@@ -242,27 +225,31 @@ export const ResultatsTestPage = () => {
                         <h1>{nomAula}</h1>
                         <h2>Sociograma de les respostes:</h2>
                         {console.log('holaaaaa')}
-                        {console.log(graf)}
-                        <Sigma
-                            renderer="canvas"
-                            style={{
-                                display: 'flex',
-                                maxWidth: 'inherit',
-                                height: '600px',
-                            }}
-                            graph={graf}
-                            settings={{
-                                drawEdges: true,
-                                clone: false,
-                                labelThreshold: '0',
-                                minArrowSize: 10,
-                                minNodeSize: 8,
-                                maxNodeSize: 8.1,
-                            }}
-                        >
-                            <RelativeSize initialSize={15} />
-                            <RandomizeNodePositions />
-                        </Sigma>
+                        {console.log(graf.edges.length)}
+                        {graf.edges.length !== 0 ? (
+                            <Sigma
+                                renderer="canvas"
+                                style={{
+                                    display: 'flex',
+                                    maxWidth: 'inherit',
+                                    height: '600px',
+                                }}
+                                graph={graf}
+                                settings={{
+                                    drawEdges: true,
+                                    clone: false,
+                                    labelThreshold: '0',
+                                    minArrowSize: 10,
+                                    minNodeSize: 8,
+                                    maxNodeSize: 8.1,
+                                }}
+                            >
+                                <RelativeSize initialSize={15} />
+                                <RandomizeNodePositions />
+                            </Sigma>
+                        ) : (
+                            <h3>Encara no hi ha cap resposta dels alumnes</h3>
+                        )}
                     </InputCard>
                 </EntryPage>
             )}
