@@ -102,7 +102,7 @@ export const AulesPage = () => {
             }
         }
         omplirAules()
-    }, [])
+    }, [data])
 
     useEffect(() => {
         const omplirAlumnes = async () => {
@@ -125,7 +125,7 @@ export const AulesPage = () => {
             }
         }
         omplirAlumnes()
-    }, [aulaAct])
+    }, [aulaAct, dataT])
 
     return (
         <>
