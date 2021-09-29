@@ -352,6 +352,7 @@ export const ResultatsTestPage = () => {
                                         }}
                                         graph={graf}
                                         settings={{
+                                            sideMargin: 10,
                                             drawEdges: true,
                                             clone: false,
                                             labelThreshold: '0',
@@ -380,6 +381,7 @@ export const ResultatsTestPage = () => {
                                         }}
                                         graph={grafP}
                                         settings={{
+                                            sideMargin: 10,
                                             drawEdges: true,
                                             clone: false,
                                             labelThreshold: '0',
@@ -407,6 +409,7 @@ export const ResultatsTestPage = () => {
                                         }}
                                         graph={grafN}
                                         settings={{
+                                            sideMargin: 10,
                                             drawEdges: true,
                                             clone: false,
                                             labelThreshold: '0',
