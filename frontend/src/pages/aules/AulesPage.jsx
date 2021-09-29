@@ -178,7 +178,7 @@ export const AulesPage = () => {
                                         history.push(routes.resultatsTest.url)
                                     }}
                                 >
-                                    Veure test i resultats
+                                    Veure resultats del test
                                 </Button>
                             ) : (
                                 <Button
