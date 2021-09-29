@@ -13,7 +13,7 @@ export const getAules = async () => {
 
 export const postAula = async (nom) => {
     try {
-        const response = await services.post('/api/aulanova', {
+        const response = await services.post('/api/aula', {
             nom,
         })
         return response.data
