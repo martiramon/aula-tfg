@@ -53,6 +53,7 @@ export const NavLogo = styled.h1`
     padding: 0 1rem;
     font-size: 1.5rem;
     font-weight: 500;
+    cursor: pointer;
 `
 
 export const NavMenu = styled.div`

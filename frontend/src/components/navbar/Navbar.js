@@ -20,10 +20,13 @@ const Navbar = () => {
         sessionStorage.clear()
         history.push(routes.login.url)
     }
+    const handleClick = () => {
+        history.push(routes.aules.url)
+    }
     return (
         <>
             <Nav>
-                <NavLogo>AULA</NavLogo>
+                <NavLogo onClick={handleClick}>AULA</NavLogo>
                 <NavEscola>{getEscola()}</NavEscola>
                 <NavUser> {getNom()} </NavUser>
                 <NavBtn>
