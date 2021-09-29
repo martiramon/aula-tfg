@@ -31,6 +31,7 @@ import { getTest, getTestResp } from './resultatsTestPage.services'
 
 import { Sigma, RandomizeNodePositions, RelativeSize } from 'react-sigma'
 import { getAlumnes } from '../aules/aulesPage.services'
+import NOverlap from 'react-sigma/lib/NOverlap'
 
 var graf = { nodes: [], edges: [] }
 var grafP = { nodes: [], edges: [] }
@@ -358,7 +359,7 @@ export const ResultatsTestPage = () => {
                                         }}
                                     >
                                         <RelativeSize initialSize={15} />
-                                        <RandomizeNodePositions />
+                                        <NOverlap></NOverlap>
                                     </Sigma>
                                 )}
                                 {tipusGraf === 'positiu' && (
@@ -380,7 +381,7 @@ export const ResultatsTestPage = () => {
                                         }}
                                     >
                                         <RelativeSize initialSize={15} />
-                                        <RandomizeNodePositions />
+                                        <NOverlap></NOverlap>
                                     </Sigma>
                                 )}
                                 {tipusGraf === 'negatiu' && (
@@ -402,7 +403,7 @@ export const ResultatsTestPage = () => {
                                         }}
                                     >
                                         <RelativeSize initialSize={15} />
-                                        <RandomizeNodePositions />
+                                        <NOverlap></NOverlap>
                                     </Sigma>
                                 )}
                             </div>
