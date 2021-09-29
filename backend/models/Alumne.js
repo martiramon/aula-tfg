@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-var Aula = require("./Aula");
-var Resposta = require("./Resposta");
+const Aula = require("./Aula");
+const Resposta = require("./Resposta");
 
 const alumneSchema = new mongoose.Schema({
   nom: String,
@@ -27,22 +27,32 @@ alumneSchema.index(
 
 alumneSchema.post("findOneAndDelete", (document) => {
   const alumneId = document._id;
-  Aula.find({ alumnes: { $in: [alumneId] } }).then((aules) => {
-    Promise.all(
-      aules.map((aula) =>
-        Aula.findOneAndUpdate(
-          aula._id,
-          { $pull: { alumnes: alumneId } },
-          { new: true }
+  mongoose
+    .model("Resposta")
+    .find({ autor: { $in: [alumneId] } })
+    .then((respostes) => {
+      Promise.all(
+        respostes.map((resposta) =>
+          mongoose.model("Resposta").findOneAndDelete(resposta._id)
         )
-      )
-    );
-  });
-  Resposta.find({ autor: { $in: [alumneId] } }).then((respostes) => {
-    Promise.all(
-      respostes.map((resposta) => Resposta.findOneAndDelete(resposta._id))
-    );
-  });
+      );
+    });
+  mongoose
+    .model("Aula")
+    .find({ alumnes: { $in: [alumneId] } })
+    .then((aules) => {
+      Promise.all(
+        aules.map((aula) =>
+          mongoose
+            .model("Aula")
+            .findOneAndUpdate(
+              aula._id,
+              { $pull: { alumnes: alumneId } },
+              { useFindAndModify: false, new: true }
+            )
+        )
+      );
+    });
 });
 
 module.exports = mongoose.model("Alumne", alumneSchema);
