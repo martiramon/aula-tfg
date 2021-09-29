@@ -32,6 +32,7 @@ import { getTest, getTestResp } from './resultatsTestPage.services'
 import { Sigma, RandomizeNodePositions, RelativeSize } from 'react-sigma'
 import { getAlumnes } from '../aules/aulesPage.services'
 import NOverlap from 'react-sigma/lib/NOverlap'
+import Filter from 'react-sigma/lib/Filter'
 
 var graf = { nodes: [], edges: [] }
 var grafP = { nodes: [], edges: [] }
@@ -52,6 +53,7 @@ export const ResultatsTestPage = () => {
     const [test, setTest] = useState('')
     const [respostes, setRespostes] = useState('')
     const [tipusGraf, setTipusGraf] = useState('complet')
+    const [nodeAct, setNodeAct] = useState('')
 
     const GreenRadio = withStyles({
         root: {
@@ -357,7 +359,13 @@ export const ResultatsTestPage = () => {
                                             minNodeSize: 8,
                                             maxNodeSize: 8.1,
                                         }}
+                                        onClickNode={(e) => {
+                                            setNodeAct(e.data.node.id)
+                                            console.log(e.data.node.id)
+                                        }}
+                                        onClickStage={(e) => setNodeAct(null)}
                                     >
+                                        <Filter neighborsOf={nodeAct}></Filter>
                                         <RelativeSize initialSize={15} />
                                         <NOverlap></NOverlap>
                                     </Sigma>
@@ -379,7 +387,12 @@ export const ResultatsTestPage = () => {
                                             minNodeSize: 8,
                                             maxNodeSize: 8.1,
                                         }}
+                                        onClickNode={(e) =>
+                                            setNodeAct(e.data.node.id)
+                                        }
+                                        onClickStage={(e) => setNodeAct(null)}
                                     >
+                                        <Filter neighborsOf={nodeAct}></Filter>
                                         <RelativeSize initialSize={15} />
                                         <NOverlap></NOverlap>
                                     </Sigma>
@@ -401,7 +414,12 @@ export const ResultatsTestPage = () => {
                                             minNodeSize: 8,
                                             maxNodeSize: 8.1,
                                         }}
+                                        onClickNode={(e) =>
+                                            setNodeAct(e.data.node.id)
+                                        }
+                                        onClickStage={(e) => setNodeAct(null)}
                                     >
+                                        <Filter neighborsOf={nodeAct}></Filter>
                                         <RelativeSize initialSize={15} />
                                         <NOverlap></NOverlap>
                                     </Sigma>
