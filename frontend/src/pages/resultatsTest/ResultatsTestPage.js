@@ -10,7 +10,7 @@ import {
     withStyles,
 } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
-import { FormatListBulleted } from '@material-ui/icons'
+import { Refresh } from '@material-ui/icons'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { EntryPage } from '../../app.styles'
@@ -54,6 +54,8 @@ export const ResultatsTestPage = () => {
     const [respostes, setRespostes] = useState('')
     const [tipusGraf, setTipusGraf] = useState('complet')
     const [nodeAct, setNodeAct] = useState('')
+
+    const [refresca, setRefresca] = useState(0)
 
     const GreenRadio = withStyles({
         root: {
@@ -239,6 +241,7 @@ export const ResultatsTestPage = () => {
 
     useEffect(() => {
         const carregarTest = async () => {
+            console.log('holaaa')
             const idTest = getTestAula()
             setTest(idTest)
             const response = await getTest(idTest)
@@ -266,7 +269,7 @@ export const ResultatsTestPage = () => {
             }
         }
         carregarTest()
-    }, [])
+    }, [refresca])
 
     const handleChange = (event) => {
         setTipusGraf(event.target.value)
@@ -284,6 +287,7 @@ export const ResultatsTestPage = () => {
                     <InputCard
                         style={{
                             paddingTop: '14px',
+                            paddingBottom: '20px',
                             marginTop: '5rem',
                             maxWidth: '900px',
                             minHeight: '700px',
@@ -304,6 +308,7 @@ export const ResultatsTestPage = () => {
                     <InputCard
                         style={{
                             paddingTop: '14px',
+                            paddingBottom: '20px',
                             marginTop: '5rem',
                             maxWidth: '900px',
                             minHeight: '700px',
@@ -431,6 +436,25 @@ export const ResultatsTestPage = () => {
                         ) : (
                             <h3>Encara no hi ha cap resposta dels alumnes</h3>
                         )}
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'flex-end',
+                            }}
+                        >
+                            <Button
+                                color="primary"
+                                size="large"
+                                startIcon={<Refresh />}
+                                onClick={() => {
+                                    setBusy(true)
+                                    setRefresca(refresca + 1)
+                                }}
+                            >
+                                Actualitzar resultats
+                            </Button>
+                        </div>
                     </InputCard>
                 </EntryPage>
             )}
