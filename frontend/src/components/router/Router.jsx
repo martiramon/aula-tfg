@@ -21,7 +21,7 @@ export const Router = () => {
                     )
                 })}
                 <Route exact path="/">
-                    <Redirect to={routes.aules.url} />
+                    <Redirect to={routes.triarAcces.url} />
                 </Route>
             </Switch>
         </BrowserRouter>
