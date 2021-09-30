@@ -177,7 +177,7 @@ export const RespondreTestPage = () => {
         setOpenD(false)
         localStorage.clear()
         sessionStorage.clear()
-        history.push(routes.loginAlumne.url)
+        history.push(routes.triarAcces.url)
     }
 
     return (

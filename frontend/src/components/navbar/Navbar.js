@@ -18,7 +18,7 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.clear()
         sessionStorage.clear()
-        history.push(routes.login.url)
+        history.push(routes.triarAcces.url)
     }
     const handleClick = () => {
         history.push(routes.aules.url)
