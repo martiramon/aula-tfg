@@ -165,3 +165,20 @@ exports.eliminarAlumne = (req, res) => {
     res.status(200).send({ message: "Alumne eliminat" });
   });
 };
+
+exports.eliminarAula = (req, res) => {
+  Aula.findOneAndDelete({
+    _id: req.params.aulaId,
+  }).exec((err, aula) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    if (!aula) {
+      return res.status(401).send({ message: "Aula Not found." });
+    }
+
+    res.status(200).send({ message: "AULA eliminada" });
+  });
+};

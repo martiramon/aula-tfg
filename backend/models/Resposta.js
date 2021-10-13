@@ -17,28 +17,38 @@ const respostaSchema = new mongoose.Schema({
 
 respostaSchema.post("findOneAndDelete", (document) => {
   const respostaId = document._id;
-  Alumne.find({ resposta: { $in: [respostaId] } }).then((alumnes) => {
-    Promise.all(
-      alumnes.map((alumne) =>
-        Alumne.findOneAndUpdate(
-          alumne._id,
-          { $pull: { resposta: respostaId } },
-          { new: true }
+  mongoose
+    .model("Alumne")
+    .find({ resposta: { $in: [respostaId] } })
+    .then((alumnes) => {
+      Promise.all(
+        alumnes.map((alumne) =>
+          mongoose
+            .model("Alumne")
+            .findOneAndUpdate(
+              alumne._id,
+              { $pull: { resposta: respostaId } },
+              { useFindAndModify: false, new: true }
+            )
         )
-      )
-    );
-  });
-  Test.find({ respostes: { $in: [respostaId] } }).then((tests) => {
-    Promise.all(
-      tests.map((test) =>
-        Test.findOneAndUpdate(
-          test._id,
-          { $pull: { respostes: respostaId } },
-          { new: true }
+      );
+    });
+  mongoose
+    .model("Test")
+    .find({ respostes: { $in: [respostaId] } })
+    .then((tests) => {
+      Promise.all(
+        tests.map((test) =>
+          mongoose
+            .model("Test")
+            .findOneAndUpdate(
+              test._id,
+              { $pull: { respostes: respostaId } },
+              { useFindAndModify: false, new: true }
+            )
         )
-      )
-    );
-  });
+      );
+    });
 });
 
 module.exports = mongoose.model("Resposta", respostaSchema);

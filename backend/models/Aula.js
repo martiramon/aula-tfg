@@ -32,23 +32,40 @@ const aulaSchema = new mongoose.Schema({
 
 aulaSchema.post("findOneAndDelete", (document) => {
   const aulaId = document._id;
-  Professor.find({ aules: { $in: [aulaId] } }).then((professors) => {
-    Promise.all(
-      professors.map((professor) =>
-        Professor.findOneAndUpdate(
-          professor._id,
-          { $pull: { aules: aulaId } },
-          { new: true }
+  mongoose
+    .model("Alumne")
+    .find({ aula: { $in: [aulaId] } })
+    .then((alumnes) => {
+      Promise.all(
+        alumnes.map((alumne) =>
+          mongoose.model("Alumne").findOneAndDelete(alumne._id)
         )
-      )
-    );
-  });
-  Alumne.find({ aula: { $in: [aulaId] } }).then((alumnes) => {
-    Promise.all(alumnes.map((alumne) => Alumne.findOneAndDelete(alumne._id)));
-  });
-  Test.find({ aula: { $in: [aulaId] } }).then((tests) => {
-    Promise.all(tests.map((test) => Test.findOneAndDelete(test._id)));
-  });
+      );
+    });
+  mongoose
+    .model("Test")
+    .find({ aula: { $in: [aulaId] } })
+    .then((tests) => {
+      Promise.all(
+        tests.map((test) => mongoose.model("Test").findOneAndDelete(test._id))
+      );
+    });
+  mongoose
+    .model("Professor")
+    .find({ aules: { $in: [aulaId] } })
+    .then((professors) => {
+      Promise.all(
+        professors.map((professor) =>
+          mongoose
+            .model("Professor")
+            .findOneAndUpdate(
+              professor._id,
+              { $pull: { aules: aulaId } },
+              { useFindAndModify: false, new: true }
+            )
+        )
+      );
+    });
 });
 
 aulaSchema.index(

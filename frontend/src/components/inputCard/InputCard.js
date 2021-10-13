@@ -15,6 +15,6 @@ export const InputCard = styled.div`
     }
     a {
         margin-left: 4px;
-        color: #2f8bfd;
+        color: #3f51b5;
     }
 `

@@ -24,22 +24,32 @@ const testSchema = new mongoose.Schema({
 
 testSchema.post("findOneAndDelete", (document) => {
   const testId = document._id;
-  Aula.find({ test: { $in: [testId] } }).then((aules) => {
-    Promise.all(
-      aules.map((aula) =>
-        Aula.findOneAndUpdate(
-          aula._id,
-          { $pull: { test: testId } },
-          { new: true }
+  mongoose
+    .model("Aula")
+    .find({ alumnes: { $in: [testId] } })
+    .then((aules) => {
+      Promise.all(
+        aules.map((aula) =>
+          mongoose
+            .model("Aula")
+            .findOneAndUpdate(
+              aula._id,
+              { $pull: { test: testId } },
+              { useFindAndModify: false, new: true }
+            )
         )
-      )
-    );
-  });
-  Resposta.find({ test: { $in: [testId] } }).then((respostes) => {
-    Promise.all(
-      respostes.map((resposta) => Resposta.findOneAndDelete(resposta._id))
-    );
-  });
+      );
+    });
+  mongoose
+    .model("Resposta")
+    .find({ test: { $in: [testId] } })
+    .then((respostes) => {
+      Promise.all(
+        respostes.map((resposta) =>
+          mongoose.model("Resposta").findOneAndDelete(resposta._id)
+        )
+      );
+    });
 });
 
 module.exports = mongoose.model("Test", testSchema);

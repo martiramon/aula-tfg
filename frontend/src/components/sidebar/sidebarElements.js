@@ -50,7 +50,7 @@ export const SideBtnLink = styled.button`
     border: 0;
     padding: 8px 16px;
     border-radius: 4px;
-    background-color: #2f8bfd;
+    background-color: #3f51b5;
     font-size: 0.9rem;
     font-weight: 500;
     color: #ffffff;

@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { TextField } from '@material-ui/core'
 import { Button } from '../button/Button'
+import { ButtonRed } from '../button/ButtonRed'
 
 export const Modal = ({
     showModal,
@@ -77,7 +78,7 @@ export const Modal = ({
                 )}
 
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel·lar</Button>
+                    <ButtonRed onClick={handleClose}>Cancel·lar</ButtonRed>
                     <Button onClick={() => handleSubmit(nom)}>Afegir</Button>
                 </DialogActions>
             </Dialog>

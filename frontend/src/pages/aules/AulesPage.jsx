@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import {
     Button,
+    ButtonRed,
     ContainerAules,
     Input,
     InputCard,
@@ -17,11 +18,14 @@ import { routes } from '../../constants/routes'
 import { getToken, setAula, setToken } from '../../utils'
 import {
     deleteAlumne,
+    deleteAula,
     getAlumnes,
     getAules,
     postAlumne,
     postAula,
 } from './aulesPage.services'
+
+var equal = require('fast-deep-equal')
 
 export const AulesPage = () => {
     const history = useHistory()
@@ -41,6 +45,8 @@ export const AulesPage = () => {
     const [errorModal, setErrorModal] = useState(false)
 
     const [showModalDelete, setShowModalDelete] = useState(false)
+    const [showModalDeleteAula, setShowModalDeleteAula] = useState(false)
+
     const [alumneAct, setAlumneAct] = useState('')
 
     const handleSubmitAula = async (nomAu) => {
@@ -85,17 +91,38 @@ export const AulesPage = () => {
         setShowModalDelete(false)
     }
 
+    const handleDeleteAula = async () => {
+        console.log(aulaAct)
+        const resp = await deleteAula(aulaAct._id)
+        setIsClicked(false)
+        setAulaAct('')
+        setBusyT(true)
+        if (!resp.error) {
+            const response = await getAules()
+            setData(
+                response.aules.sort(function (a, b) {
+                    if (a.nom < b.nom) return -1
+                    if (a.nom > b.nom) return 1
+                    return 0
+                })
+            )
+        }
+        setShowModalDeleteAula(false)
+    }
+
     useEffect(() => {
         const omplirAules = async () => {
             const response = await getAules()
             if (!response.error) {
-                setData(
-                    response.aules.sort(function (a, b) {
-                        if (a.nom < b.nom) return -1
-                        if (a.nom > b.nom) return 1
-                        return 0
-                    })
-                )
+                var aux = response.aules.sort(function (a, b) {
+                    if (a.nom < b.nom) return -1
+                    if (a.nom > b.nom) return 1
+                    return 0
+                })
+                if (equal(aux, data)) {
+                } else {
+                    setData(aux)
+                }
                 setBusy(false)
             } else {
                 history.push(routes.login.url)
@@ -104,6 +131,13 @@ export const AulesPage = () => {
         omplirAules()
     }, [data])
 
+    function replacer(key, value) {
+        if (key === 'tableData') {
+            return undefined
+        }
+        return value
+    }
+
     useEffect(() => {
         const omplirAlumnes = async () => {
             if (isClicked) {
@@ -111,13 +145,20 @@ export const AulesPage = () => {
                 if (response.error) {
                     history.push(routes.login.url)
                 } else if (response.alumnes) {
-                    setDataT(
-                        response.alumnes.sort(function (a, b) {
-                            if (a.nom < b.nom) return -1
-                            if (a.nom > b.nom) return 1
-                            return 0
-                        })
-                    )
+                    var aux2 = response.alumnes.sort(function (a, b) {
+                        if (a.nom < b.nom) return -1
+                        if (a.nom > b.nom) return 1
+                        return 0
+                    })
+                    if (
+                        equal(
+                            JSON.stringify(aux2),
+                            JSON.stringify(dataT, replacer)
+                        )
+                    ) {
+                    } else {
+                        setDataT(aux2)
+                    }
                     setBusyT(false)
                 } else {
                     setDataT('')
@@ -197,6 +238,21 @@ export const AulesPage = () => {
                                     Crear el test
                                 </Button>
                             )}
+                            <ButtonRed
+                                style={{
+                                    paddingBottom: '0.5rem',
+                                    paddingTop: '0.5rem',
+                                    marginTop: '1rem',
+                                    marginBottom: '1rem',
+                                    marginLeft: '2rem',
+                                }}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    setShowModalDeleteAula(true)
+                                }}
+                            >
+                                Eliminar aula completa{' '}
+                            </ButtonRed>
                         </div>
                         <h2>Codi únic d'Aula: {aulaAct.codi}</h2>
                     </div>
@@ -242,6 +298,14 @@ export const AulesPage = () => {
                 alumne={true}
                 handleSubmit={() => {
                     handleDeleteAlumne()
+                }}
+            ></ModalDelete>
+            <ModalDelete
+                showModal={showModalDeleteAula}
+                setShowModal={setShowModalDeleteAula}
+                alumne={false}
+                handleSubmit={() => {
+                    handleDeleteAula()
                 }}
             ></ModalDelete>
         </>

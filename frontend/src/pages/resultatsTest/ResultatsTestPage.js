@@ -166,7 +166,6 @@ export const ResultatsTestPage = () => {
                 }
             }
         }
-        console.log(graf)
     }
 
     const crearGrafPositiu = function () {
@@ -201,7 +200,6 @@ export const ResultatsTestPage = () => {
                 }
             }
         }
-        console.log(grafP)
     }
 
     const crearGrafNegatiu = function () {
@@ -236,12 +234,10 @@ export const ResultatsTestPage = () => {
                 }
             }
         }
-        console.log(grafN)
     }
 
     useEffect(() => {
         const carregarTest = async () => {
-            console.log('holaaa')
             const idTest = getTestAula()
             setTest(idTest)
             const response = await getTest(idTest)
@@ -256,7 +252,6 @@ export const ResultatsTestPage = () => {
                         response.test.respostes
                     )
                     calcularIndex()
-                    console.log(matriu)
                     crearGrafComplet()
                     crearGrafPositiu()
                     crearGrafNegatiu()
@@ -273,6 +268,10 @@ export const ResultatsTestPage = () => {
 
     const handleChange = (event) => {
         setTipusGraf(event.target.value)
+    }
+
+    function handleHideEdges(e) {
+        return e.source.id === nodeAct || e.target.id === nodeAct
     }
 
     return (
@@ -367,11 +366,13 @@ export const ResultatsTestPage = () => {
                                         }}
                                         onClickNode={(e) => {
                                             setNodeAct(e.data.node.id)
-                                            console.log(e.data.node.id)
                                         }}
                                         onClickStage={(e) => setNodeAct(null)}
                                     >
                                         <Filter neighborsOf={nodeAct}></Filter>
+                                        <Filter
+                                            edgesBy={handleHideEdges}
+                                        ></Filter>
                                         <RelativeSize initialSize={15} />
                                         <NOverlap></NOverlap>
                                     </Sigma>
@@ -400,6 +401,9 @@ export const ResultatsTestPage = () => {
                                         onClickStage={(e) => setNodeAct(null)}
                                     >
                                         <Filter neighborsOf={nodeAct}></Filter>
+                                        <Filter
+                                            edgesBy={handleHideEdges}
+                                        ></Filter>
                                         <RelativeSize initialSize={15} />
                                         <NOverlap></NOverlap>
                                     </Sigma>
@@ -422,12 +426,21 @@ export const ResultatsTestPage = () => {
                                             minNodeSize: 8,
                                             maxNodeSize: 8.1,
                                         }}
-                                        onClickNode={(e) =>
+                                        onClickNode={(e) => {
                                             setNodeAct(e.data.node.id)
-                                        }
+                                        }}
                                         onClickStage={(e) => setNodeAct(null)}
                                     >
-                                        <Filter neighborsOf={nodeAct}></Filter>
+                                        <Filter
+                                            neighborsOf={nodeAct}
+                                            edgesBy={(e) => {
+                                                return (
+                                                    e.target.id !== nodeAct ||
+                                                    e.source.id !== nodeAct
+                                                )
+                                            }}
+                                        ></Filter>
+                                        <Filter></Filter>
                                         <RelativeSize initialSize={15} />
                                         <NOverlap></NOverlap>
                                     </Sigma>

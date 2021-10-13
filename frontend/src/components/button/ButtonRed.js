@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
-export const Button = styled.button`
+export const ButtonRed = styled.button`
     width: ${(props) => (props.width ? props.width : 'auto')};
     border: 0;
     padding: 8px 16px;
     border-radius: 4px;
-    background-color: #3f51b5;
+    background-color: #bb4646;
     font-size: 0.9rem;
     font-weight: 500;
     color: #ffffff;

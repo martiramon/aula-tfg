@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { TextField } from '@material-ui/core'
 import { Button } from '../button/Button'
+import { ButtonRed } from '../button/ButtonRed'
 
 export const ModalDelete = ({
     showModal,
@@ -34,14 +35,17 @@ export const ModalDelete = ({
                 ) : (
                     <div>
                         <DialogTitle id="form-dialog-title">
-                            Estàs segur que vols eliminar aquesta resposta?
+                            Estàs segur que vols eliminar aquesta aula, el seu
+                            test i tots els seus alumnes?
                         </DialogTitle>
                     </div>
                 )}
 
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel·lar</Button>
-                    <Button onClick={() => handleSubmit()}>Eliminar</Button>
+                    <ButtonRed onClick={() => handleSubmit()}>
+                        Eliminar
+                    </ButtonRed>
                 </DialogActions>
             </Dialog>
         </>

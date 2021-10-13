@@ -40,4 +40,9 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.eliminarAlumne
   );
+  app.delete(
+    "/api/aula/:aulaId",
+    [authJwt.verifyToken],
+    controller.eliminarAula
+  );
 };

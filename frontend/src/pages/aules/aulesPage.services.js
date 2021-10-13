@@ -59,3 +59,14 @@ export const deleteAlumne = async (alumneId) => {
         }
     }
 }
+
+export const deleteAula = async (aulaId) => {
+    try {
+        const response = await services.delete('/api/aula/' + aulaId)
+        return response.data
+    } catch (error) {
+        return {
+            error: error.response.data.message,
+        }
+    }
+}
