@@ -23,9 +23,11 @@ import {
     getAules,
     postAlumne,
     postAula,
+    getRespostes,
 } from './aulesPage.services'
 
 var equal = require('fast-deep-equal')
+var nom
 
 export const AulesPage = () => {
     const history = useHistory()
@@ -48,6 +50,9 @@ export const AulesPage = () => {
     const [showModalDeleteAula, setShowModalDeleteAula] = useState(false)
 
     const [alumneAct, setAlumneAct] = useState('')
+
+    const [numRespostes, setNumRespostes] = useState('')
+    const [ultimaResposta, setUltimaResposta] = useState('')
 
     const handleSubmitAula = async (nomAu) => {
         const resp = await postAula(nomAu)
@@ -131,6 +136,21 @@ export const AulesPage = () => {
         omplirAules()
     }, [data])
 
+    useEffect(() => {
+        const calcularRespostes = () => {
+            var counter = 0
+            if (dataT) {
+                for (var i = 0; i < dataT.length; i++) {
+                    if (dataT[i].resposta) {
+                        counter++
+                    }
+                }
+                setNumRespostes(counter)
+            }
+        }
+        calcularRespostes()
+    }, [dataT])
+
     function replacer(key, value) {
         if (key === 'tableData') {
             return undefined
@@ -167,6 +187,35 @@ export const AulesPage = () => {
         }
         omplirAlumnes()
     }, [aulaAct, dataT])
+
+    useEffect(() => {
+        const ultimaResposta = async () => {
+            if (isClicked) {
+                if (aulaAct.test) {
+                    const response = await getRespostes(aulaAct.test)
+                    if (response.error) {
+                        history.push(routes.login.url)
+                    } else if (response.respostes.length > 0) {
+                        console.log(response)
+                        var mida = response.respostes.length
+                        setUltimaResposta(response.respostes[mida - 1].autor)
+                    } else {
+                        console.log(response)
+                        setUltimaResposta('')
+                    }
+                }
+            }
+        }
+        ultimaResposta()
+    }, [aulaAct])
+
+    function nomAlumne() {
+        for (var i = 0; i < dataT.length; i++) {
+            if (dataT[i]._id == ultimaResposta) {
+                return dataT[i].nom
+            }
+        }
+    }
 
     return (
         <>
@@ -262,8 +311,15 @@ export const AulesPage = () => {
                 {isBusyT ? (
                     <div></div>
                 ) : (
-                    <div display="flex" style={{ width: '100%' }}>
+                    <div
+                        style={{
+                            width: '100%',
+                            display: 'grid',
+                            gridTemplateColumns: '7fr 3fr',
+                        }}
+                    >
                         <Mtable
+                            style={{ width: '100%' }}
                             data={dataT}
                             onButtonClick={() => setShowModalAl(true)}
                             onDeleteClick={(alumne) => {
@@ -271,6 +327,111 @@ export const AulesPage = () => {
                                 setShowModalDelete(true)
                             }}
                         ></Mtable>
+                        <InputCard
+                            style={{
+                                marginBottom: '0px',
+                                marginLeft: '2rem',
+                                padding: '1rem',
+                                width: '94%',
+                            }}
+                        >
+                            <h2 style={{ fontSize: '24px' }}>
+                                Estadístiques de l'Aula
+                            </h2>
+                            <div style={{ marginBottom: '1rem' }}>
+                                <label
+                                    style={{
+                                        fontSize: '18px',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    Nombre d'alumnes a l'aula:
+                                </label>
+                            </div>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <label
+                                    style={{
+                                        fontSize: '18px',
+                                        marginLeft: '1rem',
+                                    }}
+                                >
+                                    {dataT.length}
+                                </label>
+                            </div>
+
+                            <div style={{ marginBottom: '1rem' }}>
+                                <label
+                                    style={{
+                                        fontSize: '18px',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    Nombre d'alumnes que ha contestat el test:
+                                </label>
+                            </div>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <label
+                                    style={{
+                                        fontSize: '18px',
+                                        marginLeft: '1rem',
+                                    }}
+                                >
+                                    {aulaAct.test
+                                        ? numRespostes
+                                        : "Encara no s'ha creat el test"}
+                                </label>
+                            </div>
+
+                            <div style={{ marginBottom: '1rem' }}>
+                                <label
+                                    style={{
+                                        fontSize: '18px',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    Percentatge d'alumnes que ha contestat el
+                                    test:
+                                </label>
+                            </div>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <label
+                                    style={{
+                                        fontSize: '18px',
+                                        marginLeft: '1rem',
+                                    }}
+                                >
+                                    {aulaAct.test
+                                        ? (
+                                              (numRespostes / dataT.length) *
+                                              100
+                                          ).toFixed(2) + '%'
+                                        : '0' + '%'}
+                                </label>
+                            </div>
+
+                            <div style={{ marginBottom: '1rem' }}>
+                                <label
+                                    style={{
+                                        fontSize: '18px',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    Últim alumne en respondre el test:
+                                </label>
+                            </div>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <label
+                                    style={{
+                                        fontSize: '18px',
+                                        marginLeft: '1rem',
+                                    }}
+                                >
+                                    {aulaAct.test
+                                        ? ((nom = nomAlumne()), nom)
+                                        : "Encara no s'ha creat el test o no l'ha respòs ningú"}
+                                </label>
+                            </div>
+                        </InputCard>
                     </div>
                 )}
             </ContainerAules>

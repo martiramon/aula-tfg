@@ -70,3 +70,12 @@ export const deleteAula = async (aulaId) => {
         }
     }
 }
+
+export const getRespostes = async (testId) => {
+    try {
+        const response = await services.get('/api/test/respostes/' + testId)
+        return response.data
+    } catch (error) {
+        return { error: error.response.data.message }
+    }
+}
