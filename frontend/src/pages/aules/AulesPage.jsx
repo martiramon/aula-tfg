@@ -428,7 +428,7 @@ export const AulesPage = () => {
                                 >
                                     {aulaAct.test
                                         ? ((nom = nomAlumne()), nom)
-                                        : "Encara no s'ha creat el test o no l'ha respòs ningú"}
+                                        : 'Encara no hi ha cap resposta'}
                                 </label>
                             </div>
                         </InputCard>
