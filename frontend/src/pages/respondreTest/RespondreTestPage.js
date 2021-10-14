@@ -100,8 +100,12 @@ export const RespondreTestPage = () => {
         const carregarTest = async () => {
             const response = await getTestAula(aulaAl)
             if (!response.error) {
-                setTest(response.test)
-                setBusyT(false)
+                if (response.test) {
+                    setTest(response.test)
+                    setBusyT(false)
+                } else {
+                    history.push(routes.loginAlumne.url)
+                }
             } else {
                 history.push(routes.loginAlumne.url)
             }

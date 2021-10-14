@@ -135,7 +135,7 @@ export const CrearTestPage = () => {
                         maxWidth: '900px',
                     }}
                 >
-                    <h2>Crear el Test Sociomètric</h2>
+                    <h1>Crear el Test Sociomètric</h1>
                     <form onSubmit={handleSubmit}>
                         <InputGroup>
                             <label style={{ fontSize: '1.3rem' }}>
