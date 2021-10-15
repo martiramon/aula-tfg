@@ -114,7 +114,7 @@ const Mtable = ({ data, onButtonClick, onDeleteClick }) => {
                     },
                     body: {
                         emptyDataSourceMessage:
-                            'Encara no hi ha alumnes en aquesta aula',
+                            'Encara no hi ha alumnes en aquesta aula. Afegeix-ne mitjançant el botó + situat a la part superior dreta',
                     },
                 }}
             ></MaterialTable>
