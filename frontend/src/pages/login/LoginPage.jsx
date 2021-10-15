@@ -28,6 +28,11 @@ export const LoginPage = () => {
         console.log(resp)
     }
 
+    const handleClick = (e) => {
+        e.preventDefault()
+        history.push(routes.signup.url)
+    }
+
     return (
         <EntryPage>
             <LogoHeader>AULA</LogoHeader>
@@ -68,8 +73,16 @@ export const LoginPage = () => {
                     </Button>
                 </form>
                 <span>
-                    No estàs registrat?
-                    <a href="/signup">Registra't</a>
+                    <label
+                        onClick={handleClick}
+                        style={{
+                            cursor: 'pointer',
+                            color: '#3F51B5',
+                            textDecoration: 'underline',
+                        }}
+                    >
+                        No estàs registrat?{' '}
+                    </label>
                 </span>
             </InputCard>
         </EntryPage>
