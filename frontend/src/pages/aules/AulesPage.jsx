@@ -28,6 +28,7 @@ import {
 
 var equal = require('fast-deep-equal')
 var nom
+var percentatge
 
 export const AulesPage = () => {
     const history = useHistory()
@@ -217,6 +218,12 @@ export const AulesPage = () => {
         }
     }
 
+    function calcularPercentatge() {
+        var resultat = ((numRespostes / dataT.length) * 100).toFixed(2)
+        if (!isNaN(resultat)) return resultat
+        else return 'calculant '
+    }
+
     return (
         <>
             <Navbar />
@@ -401,10 +408,9 @@ export const AulesPage = () => {
                                     }}
                                 >
                                     {aulaAct.test
-                                        ? (
-                                              (numRespostes / dataT.length) *
-                                              100
-                                          ).toFixed(2) + '%'
+                                        ? ((percentatge =
+                                              calcularPercentatge()),
+                                          percentatge + '%')
                                         : '0' + '%'}
                                 </label>
                             </div>
