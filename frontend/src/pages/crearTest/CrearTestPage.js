@@ -138,7 +138,9 @@ export const CrearTestPage = () => {
                     <h1>Crear el Test Sociomètric</h1>
                     <form onSubmit={handleSubmit}>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 1
                             </label>
                             <Input
@@ -182,7 +184,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 2
                             </label>
                             <Input
@@ -226,7 +230,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 3
                             </label>
                             <Input
@@ -270,7 +276,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 4
                             </label>
                             <Input
@@ -314,7 +322,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 5
                             </label>
                             <Input
@@ -358,7 +368,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 6
                             </label>
                             <Input
@@ -402,7 +414,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 7
                             </label>
                             <Input
@@ -446,7 +460,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 8
                             </label>
                             <Input
@@ -490,7 +506,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 9
                             </label>
                             <Input
@@ -534,7 +552,9 @@ export const CrearTestPage = () => {
                             </FormControl>
                         </InputGroup>
                         <InputGroup>
-                            <label style={{ fontSize: '1.3rem' }}>
+                            <label
+                                style={{ fontSize: '1.3rem', color: 'black' }}
+                            >
                                 Pregunta 10
                             </label>
                             <Input
