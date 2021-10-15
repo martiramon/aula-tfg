@@ -224,7 +224,12 @@ export const RespondreTestPage = () => {
                                 <h2>Respondre el Test</h2>
                                 <form onSubmit={handleSubmit}>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
                                             Pregunta 1:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
@@ -263,7 +268,12 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
                                             Pregunta 2:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
@@ -302,11 +312,16 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
-                                            Pregunta 2:
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
+                                            Pregunta 3:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
-                                            {test.preguntes[3].text}
+                                            {test.preguntes[2].text}
                                         </label>
                                     </InputGroup>
                                     <InputGroup
@@ -341,11 +356,16 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
-                                            Pregunta 3:
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
+                                            Pregunta 4:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
-                                            {test.preguntes[4].text}
+                                            {test.preguntes[3].text}
                                         </label>
                                     </InputGroup>
                                     <InputGroup
@@ -380,11 +400,16 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
-                                            Pregunta 4:
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
+                                            Pregunta 5:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
-                                            {test.preguntes[5].text}
+                                            {test.preguntes[4].text}
                                         </label>
                                     </InputGroup>
                                     <InputGroup
@@ -419,11 +444,16 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
-                                            Pregunta 5:
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
+                                            Pregunta 6:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
-                                            {test.preguntes[6].text}
+                                            {test.preguntes[5].text}
                                         </label>
                                     </InputGroup>
                                     <InputGroup
@@ -458,11 +488,16 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
-                                            Pregunta 6:
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
+                                            Pregunta 7:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
-                                            {test.preguntes[7].text}
+                                            {test.preguntes[6].text}
                                         </label>
                                     </InputGroup>
                                     <InputGroup
@@ -497,7 +532,12 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
                                             Pregunta 8:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
@@ -536,7 +576,12 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
                                             Pregunta 9:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
@@ -575,7 +620,12 @@ export const RespondreTestPage = () => {
                                         </FormControl>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: '0px' }}>
-                                        <label style={{ fontSize: '1.3rem' }}>
+                                        <label
+                                            style={{
+                                                fontSize: '1.3rem',
+                                                color: 'black',
+                                            }}
+                                        >
                                             Pregunta 10:
                                         </label>
                                         <label style={{ marginLeft: '1rem' }}>
