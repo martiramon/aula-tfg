@@ -32,6 +32,7 @@ const aulaSchema = new mongoose.Schema({
 
 aulaSchema.post("findOneAndDelete", (document) => {
   const aulaId = document._id;
+  const testId = document.test;
   mongoose
     .model("Alumne")
     .find({ aula: { $in: [aulaId] } })
@@ -44,12 +45,7 @@ aulaSchema.post("findOneAndDelete", (document) => {
     });
   mongoose
     .model("Test")
-    .find({ aula: { $in: [aulaId] } })
-    .then((tests) => {
-      Promise.all(
-        tests.map((test) => mongoose.model("Test").findOneAndDelete(test._id))
-      );
-    });
+    .findOneAndDelete({ _id: " 61729b584be986a6d55c898d " });
   mongoose
     .model("Professor")
     .find({ aules: { $in: [aulaId] } })

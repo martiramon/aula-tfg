@@ -46,7 +46,7 @@ testSchema.post("findOneAndDelete", (document) => {
     .then((respostes) => {
       Promise.all(
         respostes.map((resposta) =>
-          mongoose.model("Resposta").findOneAndDelete(resposta._id)
+          mongoose.model("Resposta").deleteMany(resposta._id)
         )
       );
     });
