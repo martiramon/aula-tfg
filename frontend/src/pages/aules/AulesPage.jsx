@@ -220,6 +220,7 @@ export const AulesPage = () => {
 
     function calcularPercentatge() {
         var resultat = ((numRespostes / dataT.length) * 100).toFixed(2)
+        if (numRespostes === 0) return 0
         if (!isNaN(resultat)) return resultat
         else return 'calculant '
     }
@@ -433,7 +434,9 @@ export const AulesPage = () => {
                                     }}
                                 >
                                     {aulaAct.test
-                                        ? ((nom = nomAlumne()), nom)
+                                        ? ((nom = nomAlumne()),
+                                          console.log(nom),
+                                          nom || 0)
                                         : 'Encara no hi ha cap resposta'}
                                 </label>
                             </div>
