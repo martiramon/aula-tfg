@@ -216,6 +216,7 @@ export const AulesPage = () => {
                 return dataT[i].nom
             }
         }
+        return 'Encara no hi ha cap resposta'
     }
 
     function calcularPercentatge() {
@@ -436,7 +437,7 @@ export const AulesPage = () => {
                                     {aulaAct.test
                                         ? ((nom = nomAlumne()),
                                           console.log(nom),
-                                          nom || 0)
+                                          nom)
                                         : 'Encara no hi ha cap resposta'}
                                 </label>
                             </div>
