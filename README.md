@@ -15,26 +15,32 @@ La sociometria és un mètode d'estudi social que permet analitzar les relacions
 
 ### Pantalla inicial
 Per escollir si accedeixes com un alumne o com un professor
-![Pantalla inicial](https://github.com/martiramon/aula-tfg/blob/master/Captures/inici.png)
 
-### Professor: Inici de sessió i registre
-![Login](https://github.com/martiramon/aula-tfg/blob/master/Captures/login.png)
-![Signup](https://github.com/martiramon/aula-tfg/blob/master/Captures/signup.png)
+<img src="https://github.com/martiramon/aula-tfg/blob/master/Captures/inici.png" width="500">
+
+### Professor: Inici de sessió 
+<img src="https://github.com/martiramon/aula-tfg/blob/master/Captures/login.png" width="500"/> 
+
+### Professor: Registre
+<img src="https://github.com/martiramon/aula-tfg/blob/master/Captures/signup.png" width="500"/>
 
 ### Professor: Pantalla principal d'AULA
 Pots crear, editar i esborrar aules, veure el codi únic de l'aula, i veure la informació i estadístiques dels alumnes
-![Aules](https://github.com/martiramon/aula-tfg/blob/master/Captures/aules.png)
+
+<img src="https://github.com/martiramon/aula-tfg/blob/master/Captures/aules.png" width="1000"/>
 
 ### Professor: Creació del test
-![Crear test](https://github.com/martiramon/aula-tfg/blob/master/Captures/creartest.png)
+<img src="https://github.com/martiramon/aula-tfg/blob/master/Captures/creartest.png" width="700"/>
 
 ### Professor: Visualització dels sociogrames
-Sociograma complet, sociograma d'interaccions positives i sociograma d'interaccions negatives. 
-![Sociograma](https://github.com/martiramon/aula-tfg/blob/master/Captures/test.png)
+Sociograma complet, sociograma d'interaccions positives i sociograma d'interaccions negatives.
+
+<img src="https://github.com/martiramon/aula-tfg/blob/master/Captures/test.png" width="800"/>
 
 ### Alumne: Accedir al test
-Amb el codi únic de l'aula, i amb el nom i cognoms
-![Acces alumne](https://github.com/martiramon/aula-tfg/blob/master/Captures/alumne.png)
+Amb el codi únic de l'aula, i amb el nom i cognoms 
+
+<img src="https://github.com/martiramon/aula-tfg/blob/master/Captures/alumne.png" width="500"/>
 
 ### Alumne: Respondre el test
-![Rsepondre test](https://github.com/martiramon/aula-tfg/blob/master/Captures/respondretest.png)
+<img src="https://github.com/martiramon/aula-tfg/blob/master/Captures/respondretest.png" width="700"/>
