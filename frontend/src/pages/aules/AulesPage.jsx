@@ -1,13 +1,10 @@
-import { FormatColorResetOutlined } from '@material-ui/icons'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import {
     Button,
     ButtonRed,
     ContainerAules,
-    Input,
     InputCard,
-    InputGroup,
     Modal,
     ModalDelete,
 } from '../../components'
@@ -15,7 +12,7 @@ import ClippedDrawer from '../../components/drawer/Drawer'
 import Mtable from '../../components/mtable/Mtable'
 import Navbar from '../../components/navbar/Navbar'
 import { routes } from '../../constants/routes'
-import { getToken, setAula, setToken } from '../../utils'
+import { setAula } from '../../utils'
 import {
     deleteAlumne,
     deleteAula,
@@ -82,7 +79,6 @@ export const AulesPage = () => {
     }
 
     const handleDeleteAlumne = async () => {
-        console.log(alumneAct)
         const resp = await deleteAlumne(alumneAct._id)
         if (!resp.error) {
             const response = await getAlumnes(aulaAct._id)
@@ -98,7 +94,6 @@ export const AulesPage = () => {
     }
 
     const handleDeleteAula = async () => {
-        console.log(aulaAct)
         const resp = await deleteAula(aulaAct._id)
         setIsClicked(false)
         setAulaAct('')
@@ -197,11 +192,9 @@ export const AulesPage = () => {
                     if (response.error) {
                         history.push(routes.login.url)
                     } else if (response.respostes.length > 0) {
-                        console.log(response)
                         var mida = response.respostes.length
                         setUltimaResposta(response.respostes[mida - 1].autor)
                     } else {
-                        console.log(response)
                         setUltimaResposta('')
                     }
                 }
@@ -435,9 +428,7 @@ export const AulesPage = () => {
                                     }}
                                 >
                                     {aulaAct.test
-                                        ? ((nom = nomAlumne()),
-                                          console.log(nom),
-                                          nom)
+                                        ? ((nom = nomAlumne()), nom)
                                         : 'Encara no hi ha cap resposta'}
                                 </label>
                             </div>

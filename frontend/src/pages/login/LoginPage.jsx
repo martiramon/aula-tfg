@@ -25,7 +25,6 @@ export const LoginPage = () => {
         setNom(resp.nom, !isRemembering)
         setEscola(resp.escola, !isRemembering)
         history.push(routes.aules.url)
-        console.log(resp)
     }
 
     const handleClick = (e) => {

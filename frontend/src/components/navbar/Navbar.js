@@ -4,8 +4,6 @@ import { getEscola, getNom } from '../../utils'
 import { useHistory } from 'react-router'
 import {
     Nav,
-    NavLink,
-    NavMenu,
     NavBtn,
     NavBtnLink,
     NavUser,

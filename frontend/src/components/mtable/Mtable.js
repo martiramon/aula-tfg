@@ -8,7 +8,6 @@ import Check from '@material-ui/icons/Check'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 import Clear from '@material-ui/icons/Clear'
-import DeleteOutline from '@material-ui/icons/DeleteOutline'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Edit from '@material-ui/icons/Edit'
 import FilterList from '@material-ui/icons/FilterList'
@@ -19,9 +18,8 @@ import SaveAlt from '@material-ui/icons/SaveAlt'
 import Search from '@material-ui/icons/Search'
 import ViewColumn from '@material-ui/icons/ViewColumn'
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles'
 import { caES } from '@material-ui/core/locale'
-import { IconButton, TablePagination } from '@material-ui/core'
 
 const theme = createMuiTheme(
     {

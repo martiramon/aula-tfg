@@ -8,40 +8,22 @@ import {
     DialogContentText,
     DialogTitle,
     FormControl,
-    FormControlLabel,
-    FormLabel,
     InputLabel,
     makeStyles,
     MenuItem,
-    Radio,
-    RadioGroup,
     Select,
-    withStyles,
 } from '@material-ui/core'
-import { green } from '@material-ui/core/colors'
-import { FormatListBulleted } from '@material-ui/icons'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { EntryPage } from '../../app.styles'
-import {
-    ContainerAules,
-    Input,
-    InputCard,
-    InputGroup,
-    Modal,
-    ModalDelete,
-} from '../../components'
-import ClippedDrawer from '../../components/drawer/Drawer'
-import Navbar from '../../components/navbar/Navbar'
+import { InputCard, InputGroup } from '../../components'
 import { routes } from '../../constants/routes'
 import {
-    getAula,
     getAulaAlumne,
     getAulaAlumneCodi,
     getIdAlumne,
     getNomAlumne,
 } from '../../utils'
-import { getAlumnes } from '../aules/aulesPage.services'
 import { getAlumnesCodiService } from '../loginAlumne/loginAlumePage.services'
 import { getTestAula, postResposta } from './respondreTestPage.services'
 

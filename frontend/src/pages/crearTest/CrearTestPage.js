@@ -8,19 +8,10 @@ import {
     withStyles,
 } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
-import { FormatListBulleted } from '@material-ui/icons'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router'
 import { EntryPage } from '../../app.styles'
-import {
-    ContainerAules,
-    Input,
-    InputCard,
-    InputGroup,
-    Modal,
-    ModalDelete,
-} from '../../components'
-import ClippedDrawer from '../../components/drawer/Drawer'
+import { Input, InputCard, InputGroup } from '../../components'
 import Navbar from '../../components/navbar/Navbar'
 import { routes } from '../../constants/routes'
 import { getAula } from '../../utils'
@@ -103,11 +94,8 @@ export const CrearTestPage = () => {
                 positiva: positiuPreguntes[i],
             })
         }
-        console.log(aula)
-        console.log(preguntes)
         const resp = await postTest(aula, preguntes)
         history.push(routes.aules.url)
-        console.log(resp)
     }
 
     const GreenRadio = withStyles({

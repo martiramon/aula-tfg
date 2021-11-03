@@ -4,7 +4,6 @@ import {
     CircularProgress,
     FormControl,
     FormControlLabel,
-    FormLabel,
     Radio,
     RadioGroup,
     withStyles,
@@ -14,22 +13,14 @@ import { Refresh } from '@material-ui/icons'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { EntryPage } from '../../app.styles'
-import {
-    ContainerAules,
-    Input,
-    InputCard,
-    InputGroup,
-    Modal,
-    ModalDelete,
-} from '../../components'
-import ClippedDrawer from '../../components/drawer/Drawer'
+import { InputCard } from '../../components'
 import Navbar from '../../components/navbar/Navbar'
 import { routes } from '../../constants/routes'
 import { getAula, getNomAula, getTestAula } from '../../utils'
 
-import { getTest, getTestResp } from './resultatsTestPage.services'
+import { getTest } from './resultatsTestPage.services'
 
-import { Sigma, RandomizeNodePositions, RelativeSize } from 'react-sigma'
+import { Sigma, RelativeSize } from 'react-sigma'
 import { getAlumnes } from '../aules/aulesPage.services'
 import NOverlap from 'react-sigma/lib/NOverlap'
 import Filter from 'react-sigma/lib/Filter'

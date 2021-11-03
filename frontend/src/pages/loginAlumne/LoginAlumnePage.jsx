@@ -7,20 +7,16 @@ import {
     Select,
     TextField,
 } from '@material-ui/core'
-import { DirectionsBikeTwoTone } from '@material-ui/icons'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
 import { EntryPage, LogoHeader } from '../../app.styles'
-import { InputAndBotton, InputCard, InputGroup } from '../../components'
+import { InputAndBotton, InputCard } from '../../components'
 import { routes } from '../../constants/routes'
 import {
     setAulaAlumne,
     setAulaAlumneCodi,
-    setEscola,
     setIdAlumne,
-    setNom,
     setNomAlumne,
-    setToken,
 } from '../../utils'
 import { getAlumnesCodiService } from './loginAlumePage.services'
 
@@ -62,7 +58,6 @@ export const LoginAlumePage = () => {
     }
 
     const handleChange = (event) => {
-        console.log(event.target.value)
         const alum = event.target.value
         setAlumneAct(alum)
     }

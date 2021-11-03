@@ -16,7 +16,6 @@ export const SignupPage = () => {
         e.preventDefault()
         const resp = await signupService(email, password, nom, escola)
         history.push(routes.login.url)
-        console.log(resp)
     }
 
     const handleClick = (e) => {
