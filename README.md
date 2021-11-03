@@ -13,20 +13,28 @@ La sociometria és un mètode d'estudi social que permet analitzar les relacions
 
 ## Captures de la Web-App
 
-#### Pantalla inicial
+### Pantalla inicial
 Per escollir si accedeixes com un alumne o com un professor
+![Pantalla inicial](https://github.com/martiramon/aula-tfg/blob/master/Captures/inici.png)
 
-#### Professor: Inici de sessió i registre
+### Professor: Inici de sessió i registre
+![Login](https://github.com/martiramon/aula-tfg/blob/master/Captures/login.png)
+![Signup](https://github.com/martiramon/aula-tfg/blob/master/Captures/signup.png)
 
-#### Professor: Pantalla principal d'AULA
+### Professor: Pantalla principal d'AULA
 Pots crear, editar i esborrar aules, veure el codi únic de l'aula, i veure la informació i estadístiques dels alumnes
+![Aules](https://github.com/martiramon/aula-tfg/blob/master/Captures/aules.png)
 
-#### Professor: Creació del test
+### Professor: Creació del test
+![Crear test](https://github.com/martiramon/aula-tfg/blob/master/Captures/creartest.png)
 
-#### Professor: Visualització dels sociogrames
+### Professor: Visualització dels sociogrames
 Sociograma complet, sociograma d'interaccions positives i sociograma d'interaccions negatives. 
+![Sociograma](https://github.com/martiramon/aula-tfg/blob/master/Captures/test.png)
 
-#### Alumne: Accedir al test
+### Alumne: Accedir al test
 Amb el codi únic de l'aula, i amb el nom i cognoms
+![Acces alumne](https://github.com/martiramon/aula-tfg/blob/master/Captures/alumne.png)
 
-#### Alumne: Respondre el test
+### Alumne: Respondre el test
+![Rsepondre test](https://github.com/martiramon/aula-tfg/blob/master/Captures/respondretest.png)
